@@ -1,0 +1,52 @@
+{
+    "user": {
+      "uid": "p6riUMCAXFXFL4Caks7QFjIfyFi1",
+      "email": "spadari.nicola@gmail.com",
+      "emailVerified": true,
+      "displayName": "Nicola Spadari",
+      "isAnonymous": false,
+      "photoURL": "https://lh3.googleusercontent.com/a-/AOh14GjJQ67qmVST5Zn2nIygJW0qnsHuQ8pibPiFx57ANZw=s96-c",
+      "providerData": [
+        {
+          "providerId": "google.com",
+          "uid": "105077466397296892177",
+          "displayName": "Nicola Spadari",
+          "email": "spadari.nicola@gmail.com",
+          "phoneNumber": null,
+          "photoURL": "https://lh3.googleusercontent.com/a-/AOh14GjJQ67qmVST5Zn2nIygJW0qnsHuQ8pibPiFx57ANZw=s96-c"
+        }
+      ],
+      "stsTokenManager": {
+        "refreshToken": "AIwUaOn4aF7aGVcIeSBPD3Hqw3QkSrwir9POs4Jn3QEbtqNxIlvsbT99-y338StnkBySL4UZ_lDfdVsStSkHC8HYAs171SiQCkidTY0ngPnjuNNlaIs5RL4Y2MWufsz5bnmMb7lpxGACnqRgVRUCzzdUDqa7RFhD_8sdnRsMjoK8OJtSH6i6I1Tj8XTBlkSgzQa3lHtn2UNANUGGoJ6irZ2BaIBHwc6lEBT8v560XMp2YcYYt_7tOpWe4_GDt3JfFbVC1bcn3CVTPx4tlbfrbxC41dPkyg2x-dQKuCrMH31V9A0yxQXFr7ep7qycqEZBy5JIUTWHg2rLut_4RBz1_DmBuU-xje8z_W1sPqfvY4KimmHlHeHPGYn6Zxrylu8sgbI7YSPleBskW8z86MyhlUA5THOH1rodmT5ZSJAC2K7JvkCEsPBwSoc",
+        "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJlYmYxMDBlYWRkYTMzMmVjOGZlYTU3ZjliNWJjM2E2YWIyOWY1NTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTmljb2xhIFNwYWRhcmkiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pKUTY3cW1WU1Q1Wm4ybkl5Z0pXMHFuc0h1UThwaWJQaUZ4NTdBTlp3PXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3JvdXRpbmVzLTIwMjIiLCJhdWQiOiJyb3V0aW5lcy0yMDIyIiwiYXV0aF90aW1lIjoxNjUyNTQ0OTIwLCJ1c2VyX2lkIjoicDZyaVVNQ0FYRlhGTDRDYWtzN1FGaklmeUZpMSIsInN1YiI6InA2cmlVTUNBWEZYRkw0Q2FrczdRRmpJZnlGaTEiLCJpYXQiOjE2NTI1NDQ5MjAsImV4cCI6MTY1MjU0ODUyMCwiZW1haWwiOiJzcGFkYXJpLm5pY29sYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwNTA3NzQ2NjM5NzI5Njg5MjE3NyJdLCJlbWFpbCI6WyJzcGFkYXJpLm5pY29sYUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.q8_t-FGoT28dh4LPPtvU9sxAj_sw5w9Tfh6X9KfQpznEHjCYhPFcFel6jN4BAJ6tlwbddvDeWSOtromnUsiT7YPwEbV0pGhdILdFzmrtsWQMorTM3Lp84qllFLLzcy9uNjtI5GbxoinnOVzKkjQeeTIKwmlEg9-i9Nj9VtOF4vUpkbNc8QE18tsVyAbvoS8Bcbe4YZGfui91HX6l-4tNLykKVRRW-zjTt38CK_BDrPhsPCGyClYMubTMGt52A6JMfl6Lw_z__myQfGbNRcj9-04wscE_jywgH1-m9EVEIMdyPVtARZRBxBJ1cvfXSRqsJp0xiRIbBqbou68Fuj2vkA",
+        "expirationTime": 1652548437908
+      },
+      "createdAt": "1652543569064",
+      "lastLoginAt": "1652544904005",
+      "apiKey": "AIzaSyB8xcI_WvopBHpGKcvslfnykeiDPElz-bY",
+      "appName": "[DEFAULT]"
+    },
+    "providerId": "google.com",
+    "_tokenResponse": {
+      "federatedId": "https://accounts.google.com/105077466397296892177",
+      "providerId": "google.com",
+      "email": "spadari.nicola@gmail.com",
+      "emailVerified": true,
+      "firstName": "Nicola",
+      "fullName": "Nicola Spadari",
+      "lastName": "Spadari",
+      "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14GjJQ67qmVST5Zn2nIygJW0qnsHuQ8pibPiFx57ANZw=s96-c",
+      "localId": "p6riUMCAXFXFL4Caks7QFjIfyFi1",
+      "displayName": "Nicola Spadari",
+      "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJlYmYxMDBlYWRkYTMzMmVjOGZlYTU3ZjliNWJjM2E2YWIyOWY1NTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTmljb2xhIFNwYWRhcmkiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pKUTY3cW1WU1Q1Wm4ybkl5Z0pXMHFuc0h1UThwaWJQaUZ4NTdBTlp3PXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3JvdXRpbmVzLTIwMjIiLCJhdWQiOiJyb3V0aW5lcy0yMDIyIiwiYXV0aF90aW1lIjoxNjUyNTQ0OTIwLCJ1c2VyX2lkIjoicDZyaVVNQ0FYRlhGTDRDYWtzN1FGaklmeUZpMSIsInN1YiI6InA2cmlVTUNBWEZYRkw0Q2FrczdRRmpJZnlGaTEiLCJpYXQiOjE2NTI1NDQ5MjAsImV4cCI6MTY1MjU0ODUyMCwiZW1haWwiOiJzcGFkYXJpLm5pY29sYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwNTA3NzQ2NjM5NzI5Njg5MjE3NyJdLCJlbWFpbCI6WyJzcGFkYXJpLm5pY29sYUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.q8_t-FGoT28dh4LPPtvU9sxAj_sw5w9Tfh6X9KfQpznEHjCYhPFcFel6jN4BAJ6tlwbddvDeWSOtromnUsiT7YPwEbV0pGhdILdFzmrtsWQMorTM3Lp84qllFLLzcy9uNjtI5GbxoinnOVzKkjQeeTIKwmlEg9-i9Nj9VtOF4vUpkbNc8QE18tsVyAbvoS8Bcbe4YZGfui91HX6l-4tNLykKVRRW-zjTt38CK_BDrPhsPCGyClYMubTMGt52A6JMfl6Lw_z__myQfGbNRcj9-04wscE_jywgH1-m9EVEIMdyPVtARZRBxBJ1cvfXSRqsJp0xiRIbBqbou68Fuj2vkA",
+      "context": "",
+      "oauthAccessToken": "ya29.a0ARrdaM9JiUEwSPAKXrTw-IV4CK4FQINNWIERXgqafHYUINP9ZYzZ8fsEvPPFJhJiwlG4eY5GxSI46Cx9cfclK9I5JE0HBBwO3foeZyuD7NUE0MWstCptaeUguYrM_3EyEA1NCi99Kek_L-D8CDHtOm0fhm0S",
+      "oauthExpireIn": 3599,
+      "refreshToken": "AIwUaOn4aF7aGVcIeSBPD3Hqw3QkSrwir9POs4Jn3QEbtqNxIlvsbT99-y338StnkBySL4UZ_lDfdVsStSkHC8HYAs171SiQCkidTY0ngPnjuNNlaIs5RL4Y2MWufsz5bnmMb7lpxGACnqRgVRUCzzdUDqa7RFhD_8sdnRsMjoK8OJtSH6i6I1Tj8XTBlkSgzQa3lHtn2UNANUGGoJ6irZ2BaIBHwc6lEBT8v560XMp2YcYYt_7tOpWe4_GDt3JfFbVC1bcn3CVTPx4tlbfrbxC41dPkyg2x-dQKuCrMH31V9A0yxQXFr7ep7qycqEZBy5JIUTWHg2rLut_4RBz1_DmBuU-xje8z_W1sPqfvY4KimmHlHeHPGYn6Zxrylu8sgbI7YSPleBskW8z86MyhlUA5THOH1rodmT5ZSJAC2K7JvkCEsPBwSoc",
+      "expiresIn": "3600",
+      "oauthIdToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImIxYTgyNTllYjA3NjYwZWYyMzc4MWM4NWI3ODQ5YmZhMGExYzgwNmMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNzExOTE2MjE5NzUtNmpybDhtZ2RhZXU5NjFrZmEwdWlwbzc5ZnNlcnQ4NHEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI3MTE5MTYyMTk3NS02anJsOG1nZGFldTk2MWtmYTB1aXBvNzlmc2VydDg0cS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwNTA3NzQ2NjM5NzI5Njg5MjE3NyIsImVtYWlsIjoic3BhZGFyaS5uaWNvbGFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJCaGlBZFE5TU1EUFNCWExFZWY3NmFRIiwiaWF0IjoxNjUyNTQ0OTIwLCJleHAiOjE2NTI1NDg1MjB9.HI67RiwzmxxJzgypzXoGnBEyJIL42Y97Zf8N4z0Uee6B-wMiyTkBd8hr-rPvpjZrVN5PdMlk_jLdOvPfqgF4u5L5XwyuutfzQw-q2ooCSW9cKNYFVV8xUy6yNWZFkXhDIlDJJ4-ZIgaB-I8RlWd1RSVReROxNw4WyR9WpTZ3DnWYX9i4qq7JcPe8z-2Iou71Cnx4s_VtL9azthm75Thggg4WWqnibvKPl1Tgacifg_bZyYKavEwlBpDcifpVOYtOc8Lf0i41mjqpEnvLI1tkV39rRk-ZuTj4f160isOgtxUNTk00G65TS5R1jakgUelTgWoP0tBRHo_T3cJQ1A_EfQ",
+      "rawUserInfo": "{\"name\":\"Nicola Spadari\",\"granted_scopes\":\"https://www.googleapis.com/auth/userinfo.email openid https://www.googleapis.com/auth/userinfo.profile\",\"id\":\"105077466397296892177\",\"verified_email\":true,\"given_name\":\"Nicola\",\"locale\":\"it\",\"family_name\":\"Spadari\",\"email\":\"spadari.nicola@gmail.com\",\"picture\":\"https://lh3.googleusercontent.com/a-/AOh14GjJQ67qmVST5Zn2nIygJW0qnsHuQ8pibPiFx57ANZw=s96-c\"}",
+      "kind": "identitytoolkit#VerifyAssertionResponse"
+    },
+    "operationType": "signIn"
+  }

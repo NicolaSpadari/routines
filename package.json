@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "author": "Nicola Spadari",
-    "description": "Define home routines for roommates",
+    "description": "Define home routines for room mates",
     "scripts": {
         "dev": "vite",
         "build": "vite build"

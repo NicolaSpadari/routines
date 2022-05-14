@@ -1,22 +1,14 @@
-<route>
-{
-    name: "Home"
-}
-</route>
-
 <template>
-    <div class="container text-center mt-20">
-        <p class="text-3xl mb-4">
-            This page is: {{ $route.name }}
-        </p>
+    <div container mt-20>
+        <Test />
+
+        <Notification />
     </div>
 </template>
 
 <script lang="ts" setup>
-    const route = useRoute();
-
     useHead({
-        title: String(route.name),
+        title: "Home",
         meta: [
             {
                 name: "description",
