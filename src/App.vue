@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <router-view v-slot="{ Component }">
         <Suspense>
             <component :is="Component" />
@@ -20,5 +21,8 @@
 	}
     .container, [container]{
         @apply mx-auto;
+    }
+    button[disabled]{
+        @apply opacity-60 cursor-not-allowed;
     }
 </style>

@@ -39,7 +39,27 @@ export default defineConfig({
                 "vue",
                 "vue-router",
                 "@vueuse/core",
-                "@vueuse/head"
+                "@vueuse/head",
+                {
+                    "@/firebase": ["auth", "db"],
+                    "uuid": [["v4", "uuidV4"]],
+                    "firebase/app": ["initializeApp"],
+                    "firebase/auth": ["GoogleAuthProvider", "signInWithPopup", "getAuth"],
+                    "firebase/firestore": [
+                        "getFirestore",
+                        "collection",
+                        "doc",
+                        "getDoc",
+                        "getDocs",
+                        "setDoc",
+                        "updateDoc",
+                        "deleteDoc",
+                        "query",
+                        "where",
+                        "arrayUnion",
+                        "arrayRemove"
+                    ]
+                }
             ],
             resolvers: [dirResolver()]
         }),
