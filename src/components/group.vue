@@ -7,5 +7,5 @@
 </template>
 
 <script lang="ts" setup>
-    const {group, createGroup, deleteGroup} = useGroup();
+    const { group, createGroup, deleteGroup } = useGroup();
 </script>

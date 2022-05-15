@@ -42,8 +42,8 @@
     const queryConstraints = ref<QueryConstraint[]>([]);
     const groupPartecipants = ref<User[]>([]);
 
-    currentGroup?.partecipants.forEach((partecipant: string) => {
-        queryConstraints.value.push(where("id", "==", partecipant));
+    currentGroup?.partecipants.forEach((partecipant: { id: string; owner: boolean }) => {
+        queryConstraints.value.push(where("id", "==", partecipant.id));
     });
 
     const querySnapshot = await getDocs(query(collection(db, "users"), ...queryConstraints.value));

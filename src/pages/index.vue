@@ -1,8 +1,9 @@
 <template>
     <div container mt-20>
-        <Test />
-
-        <Notification />
+        <pre v-if="signedIn">User is {{ user }}</pre>
+        <p v-else>
+            Not logged in
+        </p>
     </div>
 </template>
 
@@ -16,4 +17,6 @@
             }
         ]
     });
+
+    const { user, signedIn } = useUser();
 </script>

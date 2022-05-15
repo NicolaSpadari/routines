@@ -70,7 +70,10 @@
 
         if (!exists) {
             console.log("adding user: ", user);
-            groupData.partecipants.push(user.value.user.uid);
+            groupData.partecipants.push({
+                id: user.value.user.uid,
+                owner: true
+            });
             await createGroup(groupData);
             groups.value = await getGroups();
         } else {

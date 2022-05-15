@@ -8,6 +8,9 @@
                     </RouterLink>
                 </div>
                 <div space-x-5>
+                    <RouterLink to="/users">
+                        Users
+                    </RouterLink>
                     <RouterLink to="/groups">
                         Groups
                     </RouterLink>

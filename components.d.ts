@@ -7,12 +7,14 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Group: typeof import('./src/components/group.vue')['default']
     Invite: typeof import('./src/components/Invite.vue')['default']
+    Invites: typeof import('./src/components/invites.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     NewChore: typeof import('./src/components/NewChore.vue')['default']
     Notification: typeof import('./src/components/notification.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Test: typeof import('./src/components/test.vue')['default']
+    UserList: typeof import('./src/components/userList.vue')['default']
   }
 }
 

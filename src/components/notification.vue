@@ -1,13 +1,16 @@
 <template>
     <div>
-        <button @click="show()">
-            show notification
+        <button v-if="isSupported" @click="show()">
+            test: show notification
         </button>
+        <p v-else>
+            notifications not supported on this device
+        </p>
     </div>
 </template>
 
 <script lang="ts" setup>
-    const { show } = useWebNotification({
+    const { isSupported, show } = useWebNotification({
         title: "Test notification",
         dir: "auto",
         lang: "it",
