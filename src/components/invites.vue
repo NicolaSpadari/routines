@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div container mt-10>
+        <div container>
             Invites I sent:
 
             <pre>{{ invitesSent }}</pre>

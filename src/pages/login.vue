@@ -16,8 +16,12 @@
         <Notification mt-10 />
     </div>
 
-    <div>
+    <div mt-10>
         <Invites />
+    </div>
+
+    <div mt-10>
+        <MyGroups />
     </div>
 </template>
 

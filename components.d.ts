@@ -8,6 +8,7 @@ declare module '@vue/runtime-core' {
     Group: typeof import('./src/components/group.vue')['default']
     Invite: typeof import('./src/components/Invite.vue')['default']
     Invites: typeof import('./src/components/invites.vue')['default']
+    MyGroups: typeof import('./src/components/MyGroups.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     NewChore: typeof import('./src/components/NewChore.vue')['default']
     Notification: typeof import('./src/components/notification.vue')['default']
