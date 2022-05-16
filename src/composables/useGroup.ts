@@ -1,4 +1,4 @@
-import type { DocumentData, QueryConstraint } from "firebase/firestore";
+import type { QueryConstraint } from "firebase/firestore";
 
 const useGroup = () => {
     const createGroup = async(groupData: Group) => {
@@ -11,7 +11,7 @@ const useGroup = () => {
         }
     };
 
-    const getGroup = async(groupId: string): Promise<DocumentData | null> => {
+    const getGroup = async(groupId: string): Promise<Group | null> => {
         let group = null;
 
         try {
@@ -19,19 +19,26 @@ const useGroup = () => {
 
             if (result.exists()) {
                 group = result.data();
+            } else {
+                console.log("No group found");
             }
         } catch (err) {
             console.error("Error retrieving group", err);
         }
 
-        return group;
+        return group as Group;
     };
 
     const getUserGroups = async(userId: string) => {
+        const { getUser } = useUser();
+        const user = await getUser(userId);
         const groups = [] as Group[];
 
         try {
-            const querySnapshot = await getDocs(query(collection(db, "groups"), where("partecipants", "array-contains", { id: userId, owner: true || false })));
+            const querySnapshot = await getDocs(query(collection(db, "groups"), where("partecipants", "array-contains", {
+                user,
+                owner: true || false
+            })));
             querySnapshot.forEach((doc) => {
                 groups.push(doc.data() as Group);
             });
@@ -43,13 +50,13 @@ const useGroup = () => {
     };
 
     const getAllGroups = async() => {
-        const groups: DocumentData[] = [];
+        const groups: Group[] = [];
 
         try {
             const qrySnap = await getDocs(query(collection(db, "groups")));
 
             qrySnap.forEach((doc) => {
-                groups.push(doc.data());
+                groups.push(doc.data() as Group);
             });
         } catch (e) {
             console.error("Error retrieving groups", e);
@@ -63,8 +70,8 @@ const useGroup = () => {
         const groupPartecipants = [] as User[];
 
         try {
-            currentGroup?.partecipants.forEach((partecipant: { id: string; owner: boolean }) => {
-                queryConstraints.push(where("id", "==", partecipant.id));
+            currentGroup?.partecipants.forEach((partecipant: Partecipant) => {
+                queryConstraints.push(where("id", "==", partecipant.user.id));
             });
 
             const querySnapshot = await getDocs(query(collection(db, "users"), ...queryConstraints));

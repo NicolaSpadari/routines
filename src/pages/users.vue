@@ -7,12 +7,16 @@
 
                     <p v-if="alreadyInvited(user.id)">
                         Already invited
+
+                        {{ alreadyMember(user.id) ? "and a member" : "but not a member" }}
                     </p>
 
                     <template v-else>
-                        <button v-if="ownsGroup(me.user.uid)" @click="invite(user.id)">
-                            Invite
-                        </button>
+                        <div v-if="ownsGroup(me.user.uid)" space-x-5>
+                            <button v-for="group in groups" :key="group.id" border-1 border-dark-800 @click="inviteUser(user.id, group.id)">
+                                Invite in {{ group.name }}
+                            </button>
+                        </div>
                         <p v-else text-xs underline text-gray-500>
                             (You need to own a group to invite someone)
                         </p>
@@ -25,21 +29,31 @@
 
 <script lang="ts" setup>
     const { user: me, getUsers } = useUser();
-    const { getAllGroups } = useGroup();
+    const { getUserGroups, getAllGroups } = useGroup();
     const { invite, getInvitesSent } = useInvite();
     const users = ref<User[]>([]);
     const groups = ref<Group[]>([]);
+    const myGroups = ref<Group[]>([]);
     const invitesSent = ref<Invite[]>([]);
 
     const alreadyInvited = (userId: string) => {
-        return invitesSent.value.some((invite) => invite.inviteTo === userId);
+        return invitesSent.value.some((invite) => invite.inviteTo.id === userId);
+    };
+    const alreadyMember = (userId: string) => {
+        return invitesSent.value.some((invite) => invite.inviteTo.id === userId && invite.accepted);
     };
 
-    const ownsGroup = (userId: string) => {
-        return groups.value.some((group) => group.partecipants.some((partecipant) => partecipant.id === userId && partecipant.owner));
-    };
-
-    invitesSent.value = await getInvitesSent(me.value.user?.uid);
+    invitesSent.value = await getInvitesSent(me.value.user.uid);
     users.value = await getUsers();
     groups.value = await getAllGroups();
+    myGroups.value = await getUserGroups(me.value.user.uid);
+
+    const ownsGroup = (userId: string) => {
+        return groups.value.some((group) => group.partecipants.some((partecipant) => partecipant.user.id === userId));
+    };
+
+    const inviteUser = async(userId: string, groupId: string) => {
+        await invite(userId, groupId);
+        invitesSent.value = await getInvitesSent(me.value.user.uid);
+    };
 </script>

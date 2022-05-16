@@ -13,7 +13,10 @@
         </h1>
 
         <div space-y-5 mt-10>
-            <pre>Partecipants: {{ groupPartecipants }}</pre>
+            <button @click="deleteGroup($route.params.id); $router.push('/groups')">
+                delete group
+            </button>
+            <pre>Partecipants: {{ currentGroup.partecipants }}</pre>
 
             <p>Chores:</p>
             <ul>
@@ -28,23 +31,22 @@
         <div flex flex-col space-y-5 mt-10>
             <NewChore v-if="$route.params.id" :group-id="$route.params.id" @added="refreshGroup()" />
 
-            <Invite :group-id="$route.params.id" />
+            <RouterLink to="/users">
+                Invite someone
+            </RouterLink>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
     const route = useRoute();
-    const { getGroup, getGroupPartecipants } = useGroup();
+    const { getGroup, deleteGroup } = useGroup();
     const { deleteChore } = useChore();
     const currentGroup = ref<Group>();
-    const groupPartecipants = ref<User[]>([]);
 
     const refreshGroup = async() => {
         currentGroup.value = await getGroup(route.params.id.toString());
     };
 
     await refreshGroup();
-
-    groupPartecipants.value = await getGroupPartecipants(currentGroup.value);
 </script>

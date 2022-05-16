@@ -25,6 +25,22 @@ const useUser = () => {
         user.value = { user: null };
     };
 
+    const getUser = async(userId: string) => {
+        let user = null;
+
+        try {
+            const result = await getDoc(doc(db, "users", userId));
+
+            if (result.exists()) {
+                user = result.data();
+            }
+        } catch (err) {
+            console.error("Error retrieving user", err);
+        }
+
+        return user;
+    };
+
     const getUsers = async() => {
         const users = [] as User[];
 
@@ -43,6 +59,7 @@ const useUser = () => {
     return {
         user,
         signedIn,
+        getUser,
         getUsers,
         login,
         logout

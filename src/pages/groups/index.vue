@@ -9,11 +9,11 @@
 <template>
     <div container mt-20>
         <h1 font-bold font-heading text-4xl>
-            Groups
+            Your groups
         </h1>
 
         <div space-y-5 mt-10>
-            <div space-x-5>
+            <div space-x-5 border-b>
                 <input v-model="groupData.name" type="text" placeholder="Group name">
                 <button :disabled="groupData.name === ''" @click="checkOrCreateGroup()">
                     Create group
@@ -51,9 +51,13 @@
         const exists = await getGroup(groupData.name);
 
         if (!exists) {
-            console.log("adding user: ", user);
             groupData.partecipants.push({
-                id: user.value.user.uid,
+                user: {
+                    id: user.value.user.uid,
+                    name: user.value.user.displayName,
+                    email: user.value.user.email,
+                    picture: user.value.user.photoURL
+                },
                 owner: true
             });
             await createGroup(groupData);

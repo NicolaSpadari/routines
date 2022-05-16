@@ -13,14 +13,16 @@ declare interface MinimalUser {
 }
 
 declare interface Partecipant {
-    id: string
+    user: MinimalUser
     owner: boolean
 }
 
 declare interface Invite {
     id: string
-    inviteFrom: string
-    inviteTo: string
+    inviteFrom: MinimalUser
+    inviteTo: MinimalUser
+    inviteToGroup: Group
+    accepted: boolean
 }
 
 declare interface Chore {

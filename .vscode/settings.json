@@ -10,5 +10,8 @@
         "vue",
         "html",
         "json"
-    ]
+    ],
+    "explorer.fileNesting.patterns": {
+        ".gitignore": ".git*, *.d.ts"
+    }
 }

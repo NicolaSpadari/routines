@@ -1,13 +1,16 @@
 const useInvite = () => {
-    const invite = async(userId: string) => {
-        const { user: me } = useUser();
+    const invite = async(userId: string, groupId: string) => {
+        const { user: me, getUser } = useUser();
+        const { getGroup } = useGroup();
         const inviteId = uuidV4();
 
         try {
             await setDoc(doc(db, "invites", inviteId), {
                 id: inviteId,
-                inviteFrom: me.value.user?.uid,
-                inviteTo: userId
+                inviteFrom: await getUser(me.value.user?.uid),
+                inviteTo: await getUser(userId),
+                inviteToGroup: await getGroup(groupId),
+                accepted: false
             });
         } catch (err) {
             console.error("Error inviting user: ", err);
@@ -18,7 +21,7 @@ const useInvite = () => {
         const invites = [] as Invite[];
 
         try {
-            const querySnapshot = await getDocs(query(collection(db, "invites"), where("inviteFrom", "==", userId)));
+            const querySnapshot = await getDocs(query(collection(db, "invites"), where("inviteFrom.id", "==", userId)));
             querySnapshot.forEach((doc) => {
                 invites.push(doc.data() as Invite);
             });
@@ -29,9 +32,48 @@ const useInvite = () => {
         return invites;
     };
 
+    const getInvitesReceived = async(userId: string) => {
+        const invites = [] as Invite[];
+
+        try {
+            const querySnapshot = await getDocs(query(collection(db, "invites"), where("inviteTo.id", "==", userId)));
+            querySnapshot.forEach(async(doc) => {
+                invites.push(doc.data() as Invite);
+            });
+        } catch (err) {
+            console.error("Can't get invites received: ", err);
+        }
+
+        return invites;
+    };
+
+    const acceptInvite = async(inviteId: string, groupId: string, partecipant: Partecipant) => {
+        try {
+            await updateDoc(doc(db, "groups", groupId), {
+                partecipants: arrayUnion(partecipant)
+            });
+            await updateDoc(doc(db, "invites", inviteId), {
+                accepted: true
+            });
+        } catch (err) {
+            console.error("Error accepting invite:", err);
+        }
+    };
+
+    const deleteInvite = async(inviteId: string) => {
+        try {
+            await deleteDoc(doc(db, "invites", inviteId));
+        } catch (err) {
+            console.error("Error deleting invite:", err);
+        }
+    };
+
     return {
         invite,
-        getInvitesSent
+        getInvitesSent,
+        getInvitesReceived,
+        acceptInvite,
+        deleteInvite
     };
 };
 
