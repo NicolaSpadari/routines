@@ -18,7 +18,7 @@
             <p>Chores:</p>
             <ul>
                 <li v-for="chore in currentGroup.chores" :key="chore.name">
-                    {{ chore.name }} <button class="text-xs" @click="removeChore(chore)">
+                    {{ chore.name }} <button class="text-xs" @click="deleteChore($route.params.id, chore); refreshGroup()">
                         (delete)
                     </button>
                 </li>
@@ -26,7 +26,7 @@
         </div>
 
         <div flex flex-col space-y-5 mt-10>
-            <NewChore :group-id="$route.params.id" />
+            <NewChore v-if="$route.params.id" :group-id="$route.params.id" @added="refreshGroup()" />
 
             <Invite :group-id="$route.params.id" />
         </div>
@@ -34,31 +34,17 @@
 </template>
 
 <script lang="ts" setup>
-    import type { QueryConstraint } from "@firebase/firestore";
-
     const route = useRoute();
-    const { getGroup } = useGroup();
-    const currentGroup = await getGroup(route.params.id.toString());
-    const queryConstraints = ref<QueryConstraint[]>([]);
+    const { getGroup, getGroupPartecipants } = useGroup();
+    const { deleteChore } = useChore();
+    const currentGroup = ref<Group>();
     const groupPartecipants = ref<User[]>([]);
 
-    currentGroup?.partecipants.forEach((partecipant: { id: string; owner: boolean }) => {
-        queryConstraints.value.push(where("id", "==", partecipant.id));
-    });
-
-    const querySnapshot = await getDocs(query(collection(db, "users"), ...queryConstraints.value));
-    querySnapshot.forEach((doc) => {
-        groupPartecipants.value.push(doc.data() as User);
-    });
-
-    const removeChore = async(chore: Chore) => {
-        try {
-            await updateDoc(doc(db, "groups", route.params.id.toString()), {
-                chores: arrayRemove(chore)
-            });
-            console.log("removed");
-        } catch (err) {
-            console.error("Error removing chore:", err);
-        }
+    const refreshGroup = async() => {
+        currentGroup.value = await getGroup(route.params.id.toString());
     };
+
+    await refreshGroup();
+
+    groupPartecipants.value = await getGroupPartecipants(currentGroup.value);
 </script>

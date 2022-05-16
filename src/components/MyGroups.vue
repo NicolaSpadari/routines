@@ -8,18 +8,8 @@
 
 <script lang="ts" setup>
     const { user } = useUser();
+    const { getUserGroups } = useGroup();
     const groups = ref<Group[]>([]);
 
-    const getGroups = async() => {
-        try {
-            const querySnapshot = await getDocs(query(collection(db, "groups"), where("partecipants", "array-contains", { id: user.value.user?.uid, owner: true || false })));
-            querySnapshot.forEach((doc) => {
-                groups.value.push(doc.data() as Group);
-            });
-        } catch (err) {
-            console.error("Can't get groups: ", err);
-        }
-    };
-
-    getGroups();
+    groups.value = await getUserGroups(user.value.user?.uid);
 </script>

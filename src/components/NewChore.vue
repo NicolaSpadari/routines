@@ -2,15 +2,13 @@
     <div>
         <input v-model="newChore.name" type="text" placeholder="New chore name">
 
-        <button @click="updateChores()">
+        <button @click="addChore(props.groupId, newChore); newChore.name = ''; emit('added')">
             Add
         </button>
     </div>
 </template>
 
 <script lang="ts" setup>
-    import { db } from "@/firebase";
-
     const props = defineProps({
         groupId: {
             type: String,
@@ -19,22 +17,11 @@
     });
 
     const emit = defineEmits(["added"]);
+    const { addChore } = useChore();
 
     const newChore = reactive<Chore>({
         name: "",
         assignedTo: null,
         completed: false
     });
-
-    const updateChores = async() => {
-        try {
-            await updateDoc(doc(db, "groups", props.groupId), {
-                chores: arrayUnion(newChore)
-            });
-            console.log("added");
-            emit("added");
-        } catch (err) {
-            console.error("Error updating chores:", err);
-        }
-    };
 </script>

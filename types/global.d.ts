@@ -1,8 +1,26 @@
 declare interface Group {
     id: string
-    partecipants: User[]
+    partecipants: Partecipant[]
     name: string
     chores: Chore[]
+}
+
+declare interface MinimalUser {
+    id: string
+    name: string
+    email: string
+    picture: string
+}
+
+declare interface Partecipant {
+    id: string
+    owner: boolean
+}
+
+declare interface Invite {
+    id: string
+    inviteFrom: string
+    inviteTo: string
 }
 
 declare interface Chore {

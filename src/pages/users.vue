@@ -24,69 +24,22 @@
 </template>
 
 <script lang="ts" setup>
-    import type { DocumentData } from "@firebase/firestore";
-    const { user: me } = useUser();
+    const { user: me, getUsers } = useUser();
+    const { getAllGroups } = useGroup();
+    const { invite, getInvitesSent } = useInvite();
     const users = ref<User[]>([]);
-    const invitesSent = ref<any[]>([]);
     const groups = ref<Group[]>([]);
-
-    const getInvitesSent = async() => {
-        try {
-            const querySnapshot = await getDocs(query(collection(db, "invites"), where("inviteFrom", "==", me.value.user?.uid)));
-            querySnapshot.forEach((doc) => {
-                invitesSent.value.push(doc.data() as User);
-            });
-        } catch (err) {
-            console.error("Can't get invites sent: ", err);
-        }
-    };
-
-    const getUsers = async() => {
-        const querySnapshot = await getDocs(query(collection(db, "users")));
-        querySnapshot.forEach((doc) => {
-            users.value.push(doc.data() as User);
-        });
-    };
-
-    const getGroups = async(): Promise<Group[]> => {
-        try {
-            const docs: DocumentData[] = [];
-            const qrySnap = await getDocs(query(collection(db, "groups")));
-
-            qrySnap.forEach((doc) => {
-                docs.push(doc.data());
-            });
-
-            return docs as Group[];
-        } catch (e) {
-            console.error("Error retrieving groups", e);
-            return [] as DocumentData[] as Group[];
-        }
-    };
-
-    const invite = async(userId: string) => {
-        const inviteId = uuidV4();
-
-        try {
-            await setDoc(doc(db, "invites", inviteId), {
-                id: inviteId,
-                inviteFrom: me.value.user?.uid,
-                inviteTo: userId
-            });
-        } catch (err) {
-            console.error("Error inviting user: ", err);
-        }
-    };
+    const invitesSent = ref<Invite[]>([]);
 
     const alreadyInvited = (userId: string) => {
         return invitesSent.value.some((invite) => invite.inviteTo === userId);
     };
 
     const ownsGroup = (userId: string) => {
-        return groups.value.some((group) => group.partecipants.some((partecipant) => partecipant.owner));
+        return groups.value.some((group) => group.partecipants.some((partecipant) => partecipant.id === userId && partecipant.owner));
     };
 
-    getUsers();
-    getInvitesSent();
-    groups.value = await getGroups();
+    invitesSent.value = await getInvitesSent(me.value.user?.uid);
+    users.value = await getUsers();
+    groups.value = await getAllGroups();
 </script>

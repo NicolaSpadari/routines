@@ -11,7 +11,7 @@ declare module '@vue/runtime-core' {
     MyGroups: typeof import('./src/components/MyGroups.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     NewChore: typeof import('./src/components/NewChore.vue')['default']
-    Notification: typeof import('./src/components/notification.vue')['default']
+    Notification: typeof import('./src/components/Notification.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Test: typeof import('./src/components/test.vue')['default']

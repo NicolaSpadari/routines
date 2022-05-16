@@ -7,6 +7,7 @@ const useUser = () => {
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
+
             await setDoc(doc(db, "users", result.user.uid), {
                 id: result.user.uid,
                 name: result.user.displayName,
@@ -24,9 +25,25 @@ const useUser = () => {
         user.value = { user: null };
     };
 
+    const getUsers = async() => {
+        const users = [] as User[];
+
+        try {
+            const querySnapshot = await getDocs(query(collection(db, "users")));
+            querySnapshot.forEach((doc) => {
+                users.push(doc.data() as User);
+            });
+        } catch (err) {
+            console.error("Error adding user: ", err);
+        }
+
+        return users;
+    };
+
     return {
         user,
         signedIn,
+        getUsers,
         login,
         logout
     };

@@ -23,7 +23,7 @@
             <ul>
                 <li v-for="group in groups" :key="group.id">
                     <RouterLink :to="`/groups/${group.id}`">
-                        {{ group }}
+                        <pre>{{ group }}</pre>
                     </RouterLink>
                 </li>
             </ul>
@@ -32,10 +32,8 @@
 </template>
 
 <script lang="ts" setup>
-    import type { DocumentData } from "firebase/firestore";
-
     const router = useRouter();
-    const { createGroup, getGroupByName } = useGroup();
+    const { createGroup, getAllGroups, getGroup } = useGroup();
     const { signedIn, user } = useUser();
     const groups = ref<Group[]>([]);
     const groupData = reactive<Group>({
@@ -49,24 +47,8 @@
         router.push("/login");
     }
 
-    const getGroups = async(): Promise<Group[]> => {
-        try {
-            const docs: DocumentData[] = [];
-            const qrySnap = await getDocs(query(collection(db, "groups")));
-
-            qrySnap.forEach((doc) => {
-                docs.push(doc.data());
-            });
-
-            return docs as Group[];
-        } catch (e) {
-            console.error("Error retrieving groups", e);
-            return [] as DocumentData[] as Group[];
-        }
-    };
-
     const checkOrCreateGroup = async() => {
-        const exists = await getGroupByName(groupData.name);
+        const exists = await getGroup(groupData.name);
 
         if (!exists) {
             console.log("adding user: ", user);
@@ -75,11 +57,11 @@
                 owner: true
             });
             await createGroup(groupData);
-            groups.value = await getGroups();
+            groups.value = await getAllGroups();
         } else {
             alert("Group already exists");
         }
     };
 
-    groups.value = await getGroups();
+    groups.value = await getAllGroups();
 </script>
