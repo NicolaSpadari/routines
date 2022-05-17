@@ -35,6 +35,8 @@
                 Invite someone
             </RouterLink>
         </div>
+
+        <ChoreCycle :chores="currentGroup.chores" :partecipants="currentGroup.partecipants" />
     </div>
 </template>
 

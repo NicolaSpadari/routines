@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
     const router = useRouter();
-    const { createGroup, getAllGroups, getGroup } = useGroup();
+    const { createGroup, getAllGroups, getUserGroups, getGroup } = useGroup();
     const { signedIn, user } = useUser();
     const groups = ref<Group[]>([]);
     const groupData = reactive<Group>({
@@ -61,7 +61,7 @@
                 owner: true
             });
             await createGroup(groupData);
-            groups.value = await getAllGroups();
+            groups.value = await getUserGroups(user.value.user.uid);
         } else {
             alert("Group already exists");
         }

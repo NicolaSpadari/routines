@@ -6,6 +6,7 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Bot: typeof import('./src/components/bot.vue')['default']
+    ChoreCycle: typeof import('./src/components/ChoreCycle.vue')['default']
     Group: typeof import('./src/components/group.vue')['default']
     Invite: typeof import('./src/components/Invite.vue')['default']
     Invites: typeof import('./src/components/invites.vue')['default']
