@@ -2,16 +2,21 @@ const useInvite = () => {
     const invite = async(userId: string, groupId: string) => {
         const { user: me, getUser } = useUser();
         const { getGroup } = useGroup();
+        const { sendMessage } = useMessage();
         const inviteId = uuidV4();
 
         try {
-            await setDoc(doc(db, "invites", inviteId), {
+            const newInvite = {
                 id: inviteId,
                 inviteFrom: await getUser(me.value.user?.uid),
                 inviteTo: await getUser(userId),
                 inviteToGroup: await getGroup(groupId),
                 accepted: false
-            });
+            };
+
+            await setDoc(doc(db, "invites", inviteId), newInvite);
+
+            sendMessage(`${newInvite.inviteFrom.name} invited ${newInvite.inviteTo.name} to join ${newInvite.inviteToGroup.name}`);
         } catch (err) {
             console.error("Error inviting user: ", err);
         }
@@ -48,6 +53,8 @@ const useInvite = () => {
     };
 
     const acceptInvite = async(inviteId: string, groupId: string, partecipant: Partecipant) => {
+        const { sendMessage } = useMessage();
+
         try {
             await updateDoc(doc(db, "groups", groupId), {
                 partecipants: arrayUnion(partecipant)
@@ -55,6 +62,8 @@ const useInvite = () => {
             await updateDoc(doc(db, "invites", inviteId), {
                 accepted: true
             });
+
+            sendMessage(`${partecipant.user.name} accepted the invite!`);
         } catch (err) {
             console.error("Error accepting invite:", err);
         }

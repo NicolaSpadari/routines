@@ -12,8 +12,6 @@
                 Login
             </button>
         </div>
-
-        <Notification mt-10 />
     </div>
 
     <div mt-10>

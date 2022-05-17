@@ -11,7 +11,7 @@
 
             <ul>
                 <li v-for="invite in invitesReceived" :key="invite.id">
-                    <button v-if="!invite.accepted" @click="acceptInvite(invite.id, invite.inviteToGroup.id, { user: { id: me.user.uid, name: me.user.displayName, email: me.user.email, picture: me.user.photoURL }, owner: false })">
+                    <button v-if="!invite.accepted" @click="acceptInvite(invite.id, invite.inviteToGroup.id, { user: { id: me.user.uid, name: me.user.displayName, email: me.user.email, picture: me.user.photoURL }, owner: false }); $router.push(`/groups/${invite.inviteToGroup.id}`)">
                         Join "{{ invite.inviteToGroup.name }}"
                         <span text-xs text-gray-500 ml-2>(from {{ invite.inviteFrom.name }})</span>
                     </button>
