@@ -1,4 +1,6 @@
 <template>
+    <Alert />
+
     <Navbar />
     <router-view v-slot="{ Component }">
         <Suspense>
