@@ -1,14 +1,12 @@
 <template>
-    <div container mt-10 mb-50>
-        <p font-bold mb-5>Schedule:</p>
-        <div flex space-x-10>
-            <div v-for="(partecipant, index) in partecipants" :key="partecipant.user.id">
+    <div flex mt-10 space-x-5>
+        <div v-for="(partecipant, index) in props.partecipants" :key="partecipant.user.id">
+            <p mb-5>
                 {{ partecipant.user.name }}
-
-                <div v-for="chore in getShiftedChores(index)" :key="`${partecipant.user.id}-${chore.name}`">
-                    {{ chore.name }}
-                </div>
-            </div>
+            </p>
+            <p v-for="chore in getShiftedChores(props.chores, index)" :key="`${partecipant.user.id}-${chore.name}`">
+                {{ chore.name }}
+            </p>
         </div>
     </div>
 </template>
@@ -19,14 +17,5 @@
         partecipants: Partecipant[]
     }>();
 
-    const getShiftedChores = (num: number) => {
-        const chores = props.chores;
-
-        for (let i = 0; i < num; i++) {
-            const newEl = chores.shift();
-            chores.push(newEl);
-        }
-
-        return chores;
-    };
+    const { getShiftedChores } = useChore();
 </script>

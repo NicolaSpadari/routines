@@ -36,18 +36,7 @@
             </RouterLink>
         </div>
 
-        <!-- <ChoreCycle :chores="currentGroup.chores" :partecipants="currentGroup.partecipants" /> -->
-
-        <div flex mt-10 space-x-5>
-            <div v-for="(partecipant, index) in currentGroup.partecipants" :key="partecipant.user.id">
-                <p mb-5>
-                    {{ partecipant.user.name }}
-                </p>
-                <p v-for="chore in getShiftedChores(currentGroup.chores, index)" :key="`${partecipant.user.id}-${chore.name}`">
-                    {{ chore.name }}
-                </p>
-            </div>
-        </div>
+        <ChoreCycle :chores="currentGroup.chores" :partecipants="currentGroup.partecipants" />
     </div>
 </template>
 
@@ -59,11 +48,6 @@
 
     const refreshGroup = async() => {
         currentGroup.value = await getGroup(route.params.id.toString());
-    };
-
-    const getShiftedChores = (chores: Chore[], num: number) => {
-        const i = chores.length - num;
-        return chores.slice(i).concat(chores.slice(0, i));
     };
 
     await refreshGroup();

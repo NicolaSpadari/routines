@@ -29,9 +29,15 @@ const useChore = () => {
         }
     };
 
+    const getShiftedChores = (chores: Chore[], num: number) => {
+        const i = chores.length - num;
+        return chores.slice(i).concat(chores.slice(0, i));
+    };
+
     return {
         addChore,
-        deleteChore
+        deleteChore,
+        getShiftedChores
     };
 };
 
