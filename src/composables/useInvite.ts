@@ -1,6 +1,7 @@
 const useInvite = () => {
     const invite = async(userId: string, groupId: string) => {
         const { user: me, getUser } = useUser();
+        const { showAlert } = useAlert();
         const { getGroup } = useGroup();
         const { sendMessage } = useMessage();
         const inviteId = uuidV4();
@@ -18,11 +19,12 @@ const useInvite = () => {
 
             sendMessage(`${newInvite.inviteFrom.name} invited ${newInvite.inviteTo.name} to join ${newInvite.inviteToGroup.name}`);
         } catch (err) {
-            console.error("Error inviting user: ", err);
+            showAlert(err);
         }
     };
 
     const getInvitesSent = async(userId: string) => {
+        const { showAlert } = useAlert();
         const invites = [] as Invite[];
 
         try {
@@ -31,13 +33,14 @@ const useInvite = () => {
                 invites.push(doc.data() as Invite);
             });
         } catch (err) {
-            console.error("Can't get invites sent: ", err);
+            showAlert(err);
         }
 
         return invites;
     };
 
     const getInvitesReceived = async(userId: string) => {
+        const { showAlert } = useAlert();
         const invites = [] as Invite[];
 
         try {
@@ -46,7 +49,7 @@ const useInvite = () => {
                 invites.push(doc.data() as Invite);
             });
         } catch (err) {
-            console.error("Can't get invites received: ", err);
+            showAlert(err);
         }
 
         return invites;
@@ -54,6 +57,7 @@ const useInvite = () => {
 
     const acceptInvite = async(inviteId: string, groupId: string, partecipant: Partecipant) => {
         const { sendMessage } = useMessage();
+        const { showAlert } = useAlert();
 
         try {
             await updateDoc(doc(db, "groups", groupId), {
@@ -65,15 +69,17 @@ const useInvite = () => {
 
             sendMessage(`${partecipant.user.name} accepted the invite!`);
         } catch (err) {
-            console.error("Error accepting invite:", err);
+            showAlert(err);
         }
     };
 
     const deleteInvite = async(inviteId: string) => {
+        const { showAlert } = useAlert();
+
         try {
             await deleteDoc(doc(db, "invites", inviteId));
         } catch (err) {
-            console.error("Error deleting invite:", err);
+           showAlert(err);
         }
     };
 

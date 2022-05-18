@@ -1,5 +1,6 @@
 const useChore = () => {
     const addChore = async(groupId: string, newChore: Chore) => {
+        const { showAlert } = useAlert();
         const { sendMessage } = useMessage();
 
         try {
@@ -9,11 +10,12 @@ const useChore = () => {
 
             sendMessage("A chore was added to the group");
         } catch (err) {
-            console.error("Error adding new chore:", err);
+            showAlert(err);
         }
     };
 
     const deleteChore = async(groupId: string, chore: Chore) => {
+        const { showAlert } = useAlert();
         const { sendMessage } = useMessage();
 
         try {
@@ -23,7 +25,7 @@ const useChore = () => {
 
             sendMessage(`${chore.name} was removed from the group`);
         } catch (err) {
-            console.error("Error removing chore:", err);
+            showAlert(err);
         }
     };
 

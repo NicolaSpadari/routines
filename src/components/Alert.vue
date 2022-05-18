@@ -1,10 +1,12 @@
 <template>
     <div
-        v-show="visible"
-        class="fixed bottom-16 right-16 flex items-center space-x-4 p-4 text-green-700 border rounded border-green-900/10 bg-green-50"
+        v-if="visible"
+        class="fixed bottom-16 right-16 flex items-center justify-between p-4 border rounded min-w-sm text-red-700 border-red-900/10 bg-red-50"
         role="alert"
     >
-        <strong class="text-sm font-medium"> {{ message }} </strong>
+        <p class="text-sm font-bold">
+            {{ message }}
+        </p>
 
         <button class="opacity-90" type="button" @click="closeAlert()">
             <span class="sr-only"> Close </span>

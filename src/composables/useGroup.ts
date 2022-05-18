@@ -2,16 +2,19 @@ import type { QueryConstraint } from "firebase/firestore";
 
 const useGroup = () => {
     const createGroup = async(groupData: Group) => {
+        const { showAlert } = useAlert();
+
         try {
             await setDoc(doc(collection(db, "groups"), groupData.id), {
                 ...groupData
             });
         } catch (err) {
-            console.error("Error creating group: ", err);
+            showAlert(err);
         }
     };
 
     const getGroup = async(groupId: string): Promise<Group | null> => {
+        const { showAlert } = useAlert();
         let group = null;
 
         try {
@@ -19,11 +22,9 @@ const useGroup = () => {
 
             if (result.exists()) {
                 group = result.data();
-            } else {
-                console.log("No group found");
             }
         } catch (err) {
-            console.error("Error retrieving group", err);
+            showAlert(err);
         }
 
         return group as Group;
@@ -32,6 +33,7 @@ const useGroup = () => {
     const getUserGroups = async(userId: string) => {
         const { getUser } = useUser();
         const user = await getUser(userId);
+        const { showAlert } = useAlert();
         const groups = [] as Group[];
 
         try {
@@ -43,7 +45,7 @@ const useGroup = () => {
                 groups.push(doc.data() as Group);
             });
         } catch (err) {
-            console.error("Can't get user groups: ", err);
+            showAlert(err);
         }
 
         return groups;
@@ -51,6 +53,7 @@ const useGroup = () => {
 
     const getAllGroups = async() => {
         const groups: Group[] = [];
+        const { showAlert } = useAlert();
 
         try {
             const qrySnap = await getDocs(query(collection(db, "groups")));
@@ -58,14 +61,15 @@ const useGroup = () => {
             qrySnap.forEach((doc) => {
                 groups.push(doc.data() as Group);
             });
-        } catch (e) {
-            console.error("Error retrieving groups", e);
+        } catch (err) {
+            showAlert(err);
         }
 
         return groups;
     };
 
     const getGroupPartecipants = async(currentGroup: Group) => {
+        const { showAlert } = useAlert();
         const queryConstraints = [] as QueryConstraint[];
         const groupPartecipants = [] as User[];
 
@@ -79,17 +83,19 @@ const useGroup = () => {
                 groupPartecipants.push(doc.data() as User);
             });
         } catch (err) {
-            console.error("Error getting group partecipants", err);
+            showAlert(err);
         }
 
         return groupPartecipants;
     };
 
     const deleteGroup = async(groupId: string): Promise<void> => {
+        const { showAlert } = useAlert();
+
         try {
             await deleteDoc(doc(db, "groups", groupId));
         } catch (err) {
-            console.error("Error deleting group", err);
+           showAlert(err);
         }
     };
 

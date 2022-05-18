@@ -1,6 +1,6 @@
 const useUser = () => {
+    const { showAlert } = useAlert();
     const user = useLocalStorage<User | EmptyUser>("user", { user: null });
-
     const signedIn = computed<boolean>(() => user.value.user !== null);
 
     const login = async() => {
@@ -16,7 +16,7 @@ const useUser = () => {
             });
             user.value = result as unknown as User;
         } catch (err) {
-            console.error("Error adding user: ", err);
+            showAlert(err);
         }
     };
 
@@ -26,6 +26,7 @@ const useUser = () => {
     };
 
     const getUser = async(userId: string) => {
+        const { showAlert } = useAlert();
         let user = null;
 
         try {
@@ -35,13 +36,14 @@ const useUser = () => {
                 user = result.data();
             }
         } catch (err) {
-            console.error("Error retrieving user", err);
+            showAlert(err);
         }
 
         return user;
     };
 
     const getUsers = async() => {
+        const { showAlert } = useAlert();
         const users = [] as User[];
 
         try {
@@ -50,7 +52,7 @@ const useUser = () => {
                 users.push(doc.data() as User);
             });
         } catch (err) {
-            console.error("Error adding user: ", err);
+            showAlert(err);
         }
 
         return users;
