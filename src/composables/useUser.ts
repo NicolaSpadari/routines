@@ -58,11 +58,28 @@ const useUser = () => {
         return users;
     };
 
+    const getUsersByName = async(name: string) => {
+        const { showAlert } = useAlert();
+        const users = [] as User[];
+
+        try {
+            const querySnapshot = await getDocs(query(collection(db, "users"), where("name", ">=", name), where("name", "<=", `${name}\uF8FF`)));
+            querySnapshot.forEach((doc) => {
+                users.push(doc.data() as User);
+            });
+        } catch (err) {
+            showAlert(err);
+        }
+
+        return users;
+    };
+
     return {
         user,
         signedIn,
         getUser,
         getUsers,
+        getUsersByName,
         login,
         logout
     };
