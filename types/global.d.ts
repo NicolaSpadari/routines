@@ -26,8 +26,9 @@ declare interface Invite {
 }
 
 declare interface Chore {
+    id: string
     name: string
-    completed: boolean
+    completed: string[]
 }
 
 declare interface EmptyUser {

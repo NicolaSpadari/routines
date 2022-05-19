@@ -2,7 +2,7 @@
     <div>
         <input v-model="newChore.name" type="text" placeholder="New chore name">
 
-        <button @click="addChore(props.groupId, newChore); newChore.name = ''; emit('added')">
+        <button @click="addAndCleanChore(props.groupId, newChore); emit('added')">
             Add
         </button>
     </div>
@@ -20,7 +20,13 @@
     const { addChore } = useChore();
 
     const newChore = reactive<Chore>({
+        id: uuidV4(),
         name: "",
-        completed: false
+        completed: []
     });
+
+    const addAndCleanChore = async(groupId: string, chore: Chore) => {
+        await addChore(groupId, chore);
+        newChore.name = "";
+    };
 </script>

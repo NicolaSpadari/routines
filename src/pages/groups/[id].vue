@@ -47,7 +47,8 @@
     const route = useRoute();
     const { user } = useUser();
     const { getGroup, deleteGroup } = useGroup();
-    const { deleteChore } = useChore();
+    const { addChore, deleteChore } = useChore();
+    const { sendMessage } = useMessage();
     const currentGroup = ref<Group>();
 
     const refreshGroup = async() => {
@@ -58,9 +59,14 @@
         return currentGroup.value?.partecipants.find((partecipant: Partecipant) => (partecipant.user.id === user.value.user?.uid) && partecipant.owner);
     };
 
-    const completeChore = (chore: Chore) => {
-        currentGroup.value!.chores.find((c: Chore) => c.name === chore.name)!.completed = true;
-        // TODO: useStorage save chores for individual users
+    const completeChore = async(chore: Chore) => {
+        const prevChore = chore;
+        prevChore.completed = chore.completed.filter((id: string) => id !== user.value.user!.uid);
+        await deleteChore(route.params.id.toString(), prevChore);
+        currentGroup.value!.chores.find((c: Chore) => c.name === chore.name)!.completed.push(user.value.user!.uid);
+        await addChore(route.params.id.toString(), currentGroup.value!.chores.find((c: Chore) => c.name === chore.name));
+
+        sendMessage(`${user.value.user?.displayName} completed ${chore.name}`);
     };
 
     await refreshGroup();

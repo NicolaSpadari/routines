@@ -4,9 +4,9 @@
             <p mb-5>
                 {{ partecipant.user.name }}
             </p>
-            <p v-for="chore in getShiftedChores(props.chores, index)" :key="`${partecipant.user.id}-${chore.name}`" space-x-2>
+            <p v-for="chore in getShiftedChores(props.chores, index)" :key="`${partecipant.user.id}-${chore.id}`" space-x-2>
                 <span>{{ chore.name }}</span>
-                <button v-if="partecipant.user.id === user.user.uid && !chore.completed" class="i-heroicons-outline-check w-4 h-4" @click="markCompleted(chore)" />
+                <button v-if="partecipant.user.id === user.user.uid && !chore.completed.includes(partecipant.user.id)" class="i-heroicons-outline-check w-4 h-4" @click="emit('completed', chore)" />
             </p>
         </div>
     </div>
@@ -21,10 +21,4 @@
     const emit = defineEmits(["completed"]);
     const { user } = useUser();
     const { getShiftedChores } = useChore();
-    const { sendMessage } = useMessage();
-
-    const markCompleted = (chore: Chore) => {
-        emit("completed", chore);
-        sendMessage(`${user.value.user?.displayName} completed ${chore.name}`);
-    };
 </script>

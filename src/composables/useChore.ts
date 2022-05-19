@@ -1,5 +1,6 @@
 const useChore = () => {
     const addChore = async(groupId: string, newChore: Chore) => {
+        console.log(newChore);
         const { showAlert } = useAlert();
         const { sendMessage } = useMessage();
 
@@ -8,7 +9,7 @@ const useChore = () => {
                 chores: arrayUnion(newChore)
             });
 
-            sendMessage("A chore was added to the group");
+            sendMessage(`Chore ${newChore.name} was added to the group`);
         } catch (err) {
             showAlert(err);
         }
