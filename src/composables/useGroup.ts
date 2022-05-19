@@ -89,6 +89,21 @@ const useGroup = () => {
         return groupPartecipants;
     };
 
+    const leaveGroup = async(groupId: string, partecipant: Partecipant) => {
+        const { showAlert } = useAlert();
+        const { sendMessage } = useMessage();
+
+        try {
+            await updateDoc(doc(db, "groups", groupId), {
+                partecipants: arrayRemove(partecipant)
+            });
+
+            sendMessage(`${partecipant.user.name} left the group`);
+        } catch (err) {
+            showAlert(err);
+        }
+    };
+
     const deleteGroup = async(groupId: string): Promise<void> => {
         const { showAlert } = useAlert();
 
@@ -105,7 +120,8 @@ const useGroup = () => {
         getUserGroups,
         getAllGroups,
         createGroup,
-        deleteGroup
+        deleteGroup,
+        leaveGroup
     };
 };
 

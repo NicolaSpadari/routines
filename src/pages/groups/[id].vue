@@ -13,8 +13,11 @@
         </h1>
 
         <div space-y-5 mt-10>
-            <button @click="deleteGroup($route.params.id); $router.push('/groups')">
+            <button v-if="isGroupOwner()" @click="deleteGroup($route.params.id); $router.push('/groups')">
                 delete group
+            </button>
+            <button v-else @click="leaveGroup($route.params.id); $router.push('/groups')">
+                leave group
             </button>
             <pre>Partecipants: {{ currentGroup.partecipants }}</pre>
 
@@ -42,12 +45,17 @@
 
 <script lang="ts" setup>
     const route = useRoute();
+    const { user } = useUser();
     const { getGroup, deleteGroup } = useGroup();
     const { deleteChore } = useChore();
     const currentGroup = ref<Group>();
 
     const refreshGroup = async() => {
         currentGroup.value = await getGroup(route.params.id.toString());
+    };
+
+    const isGroupOwner = () => {
+        return currentGroup.value?.partecipants.find((partecipant: Partecipant) => (partecipant.user.id === user.value.user?.uid) && partecipant.owner);
     };
 
     await refreshGroup();
