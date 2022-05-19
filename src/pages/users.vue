@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        requiresAuth: true
+    }
+}
+</route>
+
 <template>
     <div container mt-20>
         <input v-model="kw" placeholder="Search user">
