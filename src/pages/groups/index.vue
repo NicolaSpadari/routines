@@ -32,9 +32,9 @@
 </template>
 
 <script lang="ts" setup>
-    const router = useRouter();
     const { createGroup, getAllGroups, getUserGroups, getGroup } = useGroup();
-    const { signedIn, user } = useUser();
+    const { user } = useUser();
+    const { showAlert } = useAlert();
     const groups = ref<Group[]>([]);
     const groupData = reactive<Group>({
         id: uuidV4(),
@@ -42,10 +42,6 @@
         partecipants: [],
         chores: []
     });
-
-    if (!signedIn.value) {
-        router.push("/login");
-    }
 
     const checkOrCreateGroup = async() => {
         const exists = await getGroup(groupData.name);
@@ -63,7 +59,7 @@
             await createGroup(groupData);
             groups.value = await getUserGroups(user.value.user.uid);
         } else {
-            alert("Group already exists");
+            showAlert("Group already exists");
         }
     };
 

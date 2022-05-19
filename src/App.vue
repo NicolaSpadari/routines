@@ -9,6 +9,19 @@
     </router-view>
 </template>
 
+<script lang="ts" setup>
+    const router = useRouter();
+    const { signedIn } = useUser();
+
+    router.beforeEach(async(to, _, next) => {
+        if (to.meta.requiresAuth && !signedIn.value) {
+            next("/login");
+        } else {
+            next();
+        }
+    });
+</script>
+
 <style lang="scss">
 	html {
 		-webkit-tap-highlight-color: transparent;
