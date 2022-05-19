@@ -39,7 +39,7 @@
             </RouterLink>
         </div>
 
-        <ChoreCycle :chores="currentGroup.chores" :partecipants="currentGroup.partecipants" />
+        <ChoreCycle :chores="currentGroup.chores" :partecipants="currentGroup.partecipants" @completed="completeChore" />
     </div>
 </template>
 
@@ -56,6 +56,11 @@
 
     const isGroupOwner = () => {
         return currentGroup.value?.partecipants.find((partecipant: Partecipant) => (partecipant.user.id === user.value.user?.uid) && partecipant.owner);
+    };
+
+    const completeChore = (chore: Chore) => {
+        currentGroup.value!.chores.find((c: Chore) => c.name === chore.name)!.completed = true;
+        // TODO: useStorage save chores for individual users
     };
 
     await refreshGroup();

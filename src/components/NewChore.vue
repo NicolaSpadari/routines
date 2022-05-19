@@ -21,7 +21,6 @@
 
     const newChore = reactive<Chore>({
         name: "",
-        assignedTo: null,
         completed: false
     });
 </script>

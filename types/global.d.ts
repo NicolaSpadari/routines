@@ -27,7 +27,6 @@ declare interface Invite {
 
 declare interface Chore {
     name: string
-    assignedTo: User | null
     completed: boolean
 }
 
@@ -55,7 +54,7 @@ declare interface User {
         appName: string
     }
     providerId: string
-    _tokenResponse: {
+    _tokenResponse?: {
         federatedId: string
         providerId: string
         email: string
