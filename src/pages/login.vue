@@ -14,12 +14,14 @@
         </div>
     </div>
 
-    <div mt-10>
-        <Invites />
-    </div>
+    <div v-if="signedIn">
+        <div mt-10>
+            <Invites />
+        </div>
 
-    <div mt-10>
-        <MyGroups />
+        <div mt-10>
+            <MyGroups />
+        </div>
     </div>
 </template>
 
