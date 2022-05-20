@@ -1,6 +1,5 @@
 const useChore = () => {
-    const addChore = async(groupId: string, newChore: Chore) => {
-        console.log(newChore);
+    const addChore = async(groupId: string, newChore: Chore, notify = true) => {
         const { showAlert } = useAlert();
         const { sendMessage } = useMessage();
 
@@ -9,13 +8,15 @@ const useChore = () => {
                 chores: arrayUnion(newChore)
             });
 
-            sendMessage(`Chore ${newChore.name} was added to the group`);
+            if (notify) {
+                sendMessage(`Chore ${newChore.name} was added to the group`);
+            }
         } catch (err) {
             showAlert(err);
         }
     };
 
-    const deleteChore = async(groupId: string, chore: Chore) => {
+    const deleteChore = async(groupId: string, chore: Chore, notify = true) => {
         const { showAlert } = useAlert();
         const { sendMessage } = useMessage();
 
@@ -24,7 +25,9 @@ const useChore = () => {
                 chores: arrayRemove(chore)
             });
 
-            sendMessage(`${chore.name} was removed from the group`);
+            if (notify) {
+                sendMessage(`${chore.name} was removed from the group`);
+            }
         } catch (err) {
             showAlert(err);
         }

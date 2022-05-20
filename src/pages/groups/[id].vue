@@ -62,9 +62,9 @@
     const completeChore = async(chore: Chore) => {
         const prevChore = chore;
         prevChore.completed = chore.completed.filter((id: string) => id !== user.value.user!.uid);
-        await deleteChore(route.params.id.toString(), prevChore);
+        await deleteChore(route.params.id.toString(), prevChore, false);
         currentGroup.value!.chores.find((c: Chore) => c.name === chore.name)!.completed.push(user.value.user!.uid);
-        await addChore(route.params.id.toString(), currentGroup.value!.chores.find((c: Chore) => c.name === chore.name));
+        await addChore(route.params.id.toString(), currentGroup.value!.chores.find((c: Chore) => c.name === chore.name), false);
 
         sendMessage(`${user.value.user?.displayName} completed ${chore.name}`);
     };
