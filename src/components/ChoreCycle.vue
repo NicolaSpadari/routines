@@ -8,6 +8,10 @@
                 <span>{{ chore.name }}</span>
                 <button v-if="partecipant.user.id === user.user.uid && !chore.completed.includes(partecipant.user.id)" class="i-heroicons-outline-check w-4 h-4" @click="emit('completed', chore)" />
             </p>
+
+            <p mt-3>
+                All completed ? {{ allChoresCompleted(partecipant.user.id) }}
+            </p>
         </div>
     </div>
 </template>
@@ -21,4 +25,6 @@
     const emit = defineEmits(["completed"]);
     const { user } = useUser();
     const { getShiftedChores } = useChore();
+
+    const allChoresCompleted = (partecipantId: string) => computed(() => props.chores.every((chore: Chore) => chore.completed.includes(partecipantId)));
 </script>
