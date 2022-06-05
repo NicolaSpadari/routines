@@ -8,7 +8,7 @@ const useGroup = () => {
             await setDoc(doc(collection(db, "groups"), groupData.id), {
                 ...groupData
             });
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
     };
@@ -23,7 +23,7 @@ const useGroup = () => {
             if (result.exists()) {
                 group = result.data();
             }
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
 
@@ -44,7 +44,7 @@ const useGroup = () => {
             querySnapshot.forEach((doc) => {
                 groups.push(doc.data() as Group);
             });
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
 
@@ -61,7 +61,7 @@ const useGroup = () => {
             qrySnap.forEach((doc) => {
                 groups.push(doc.data() as Group);
             });
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
 
@@ -82,7 +82,7 @@ const useGroup = () => {
             querySnapshot.forEach((doc) => {
                 groupPartecipants.push(doc.data() as User);
             });
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
 
@@ -99,7 +99,7 @@ const useGroup = () => {
             });
 
             sendMessage(`${partecipant.user.name} left the group`);
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
     };
@@ -109,8 +109,8 @@ const useGroup = () => {
 
         try {
             await deleteDoc(doc(db, "groups", groupId));
-        } catch (err) {
-           showAlert(err);
+        } catch (err: any) {
+            showAlert(err);
         }
     };
 

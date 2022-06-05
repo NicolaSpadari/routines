@@ -1,5 +1,6 @@
 import {
     defineConfig,
+    presetTagify,
     presetAttributify,
     presetIcons,
     presetTypography,
@@ -10,11 +11,20 @@ import {
 } from "unocss";
 
 export default defineConfig({
-    shortcuts: [],
+    shortcuts: [
+        ["crate", "max-w-5xl mx-auto"],
+        ["crate-sm", "max-w-sm mx-auto"]
+    ],
     presets: [
         presetUno(),
+        presetTagify(),
         presetAttributify(),
-        presetIcons(),
+        presetIcons({
+            extraProperties: {
+                "display": "inline-block",
+                "vertical-align": "middle"
+            }
+        }),
         presetTypography(),
         presetWebFonts({
             fonts: {
@@ -29,6 +39,16 @@ export default defineConfig({
             }
         })
     ],
+    theme: {
+        breakpoints: {
+            sm: "576px",
+            md: "768px",
+            lg: "992px",
+            xl: "1200px",
+            xxl: "1400px",
+            uw: "2000px"
+        }
+    },
     transformers: [
         transformerDirectives(),
         transformerVariantGroup()

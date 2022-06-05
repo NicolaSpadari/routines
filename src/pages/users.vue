@@ -66,12 +66,12 @@
         return groups.value.some((group) => group.partecipants.some((partecipant) => partecipant.user.id === userId));
     };
 
-    const inviteUser = async(userId: string, groupId: string) => {
+    const inviteUser = async (userId: string, groupId: string) => {
         await invite(userId, groupId);
         invitesSent.value = await getInvitesSent(me.value.user.uid);
     };
 
-    const search = useDebounceFn(async() => {
+    const search = useDebounceFn(async () => {
         console.log("searching...");
 
         if (kw.value !== "") {

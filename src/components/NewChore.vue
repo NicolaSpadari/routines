@@ -25,7 +25,7 @@
         completed: []
     });
 
-    const addAndCleanChore = async(groupId: string, chore: Chore) => {
+    const addAndCleanChore = async (groupId: string, chore: Chore) => {
         await addChore(groupId, chore);
         newChore.name = "";
     };

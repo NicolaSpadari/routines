@@ -15,7 +15,7 @@ const useUser = () => {
                 picture: result.user.photoURL
             });
             user.value = result as unknown as User;
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
     };
@@ -35,7 +35,7 @@ const useUser = () => {
             if (result.exists()) {
                 user = result.data();
             }
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
 
@@ -51,7 +51,7 @@ const useUser = () => {
             querySnapshot.forEach((doc) => {
                 users.push(doc.data() as User);
             });
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
 
@@ -67,7 +67,7 @@ const useUser = () => {
             querySnapshot.forEach((doc) => {
                 users.push(doc.data() as User);
             });
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
 

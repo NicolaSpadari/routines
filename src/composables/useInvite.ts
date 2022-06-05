@@ -17,8 +17,8 @@ const useInvite = () => {
 
             await setDoc(doc(db, "invites", inviteId), newInvite);
 
-            sendMessage(`${newInvite.inviteFrom.name} invited ${newInvite.inviteTo.name} to join ${newInvite.inviteToGroup.name}`);
-        } catch (err) {
+            sendMessage(`${newInvite.inviteFrom?.name} invited ${newInvite.inviteTo?.name} to join ${newInvite.inviteToGroup.name}`);
+        } catch (err: any) {
             showAlert(err);
         }
     };
@@ -32,7 +32,7 @@ const useInvite = () => {
             querySnapshot.forEach((doc) => {
                 invites.push(doc.data() as Invite);
             });
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
 
@@ -48,7 +48,7 @@ const useInvite = () => {
             querySnapshot.forEach(async(doc) => {
                 invites.push(doc.data() as Invite);
             });
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
 
@@ -68,7 +68,7 @@ const useInvite = () => {
             });
 
             sendMessage(`${partecipant.user.name} accepted the invite!`);
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
     };
@@ -78,8 +78,8 @@ const useInvite = () => {
 
         try {
             await deleteDoc(doc(db, "invites", inviteId));
-        } catch (err) {
-           showAlert(err);
+        } catch (err: any) {
+            showAlert(err);
         }
     };
 

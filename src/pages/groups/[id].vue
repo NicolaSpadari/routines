@@ -51,7 +51,7 @@
     const { sendMessage } = useMessage();
     const currentGroup = ref<Group>();
 
-    const refreshGroup = async() => {
+    const refreshGroup = async () => {
         currentGroup.value = await getGroup(route.params.id.toString());
     };
 
@@ -59,7 +59,7 @@
         return currentGroup.value?.partecipants.find((partecipant: Partecipant) => (partecipant.user.id === user.value.user?.uid) && partecipant.owner);
     };
 
-    const completeChore = async(chore: Chore) => {
+    const completeChore = async (chore: Chore) => {
         const prevChore = chore;
         prevChore.completed = chore.completed.filter((id: string) => id !== user.value.user!.uid);
         await deleteChore(route.params.id.toString(), prevChore, false);
