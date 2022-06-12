@@ -6,6 +6,8 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Alert: typeof import('./src/components/Alert.vue')['default']
+    Badge: typeof import('./src/components/Badge.vue')['default']
+    Bottombar: typeof import('./src/components/Bottombar.vue')['default']
     ChoreCycle: typeof import('./src/components/ChoreCycle.vue')['default']
     Invites: typeof import('./src/components/invites.vue')['default']
     MyGroups: typeof import('./src/components/MyGroups.vue')['default']
@@ -14,6 +16,7 @@ declare module '@vue/runtime-core' {
     QuickBox: typeof import('./src/components/QuickBox.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VCupertino: typeof import('v-cupertino')['VCupertino']
   }
 }
 

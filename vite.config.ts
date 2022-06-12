@@ -36,7 +36,15 @@ export default defineConfig({
         }),
         Unocss(),
         Components({
-            deep: false
+            deep: false,
+            dts: "src/components.d.ts",
+            resolvers: [
+                (componentName) => {
+                    if (componentName === "VCupertino") {
+                        return { name: "default", from: "v-cupertino" };
+                    }
+                }
+            ]
         }),
         DirResolverHelper(),
         AutoImport({

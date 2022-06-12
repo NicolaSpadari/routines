@@ -7,42 +7,32 @@
 </route>
 
 <template>
-    <div container px-5 mt-10>
-        <h1 font-bold font-heading text-4xl>
-            Your groups
-        </h1>
+    <div mt-5>
+        <div flex justify-between items-center>
+            <p text-3xl font-bold text-broncos sm="text-4xl">
+                Groups
+            </p>
 
-        <div space-y-15 mt-10>
-            <div relative max-w-sm mx-auto>
-                <label class="sr-only" for="groupName"> Group Name </label>
+            <Badge active @click="panelOpen = true">
+                New +
+            </Badge>
+        </div>
 
-                <input
-                    id="groupName"
-                    w-full py-4 pl-3 pr-16 text-sm border-2 border-gray-200 rounded-lg
-                    type="text"
-                    placeholder="Group name"
-                    v-model="groupData.name"
-                >
-
-                <button :disabled="groupData.name === ''" @click="checkOrCreateGroup()" absolute text-white translate-y="-1/2" bg-blue-600 rounded-full top="1/2" right-4 w-10 h-10>
-                    <i-heroicons-solid-arrow-right w-4 h-4 />
-                </button>
-            </div>
-
+        <div mt-10>
             <div flex items-center justify-center space-x-5>
                 <span w-20 border-b border-gray-300 />
 
                 <p text-xs text-center text-gray-500 uppercase>
-                    or browse
+                    Your groups
                 </p>
 
                 <span w-20 border-b border-gray-300 />
             </div>
 
-            <div grid lg="grid-cols-2 gap-4">
-                <RouterLink v-for="group in groups" :key="group.id" :to="`/groups/${group.id}`" block p-8 bg-gray-900 border border-gray-800 shadow-xl rounded-xl>
-                    <p text-xl font-bold text-white>
-                        {{ group.name }}
+            <div grid lg="grid-cols-2 gap-4" space-y-5 mt-5>
+                <RouterLink v-for="group in groups" :key="group.id" :to="`/groups/${group.id}`" block p-8 bg-white shadow-xl rounded-xl>
+                    <p text-xl font-bold text-broncos>
+                        {{ group.name }} <span text-gray-400 text-base font-normal>&middot; {{ group.chores.length }} chores</span>
                     </p>
 
                     <div flex items-center mt-4>
@@ -61,12 +51,35 @@
                         </div>
                     </div>
 
-                    <p class="mt-4 text-sm text-gray-300">
-                        Owner: {{ group.partecipants.find(p => p.owner).user.name }} &middot; {{ group.chores.length }} chores
+                    <p mt-4 text-sm text-gray-400>
+                        Owner: {{ group.partecipants.find(p => p.owner).user.name }}
                     </p>
                 </RouterLink>
             </div>
         </div>
+
+        <Panel :is-open="panelOpen" @close="panelOpen = false">
+            <div m-5>
+                <label class="relative block p-3 border-2 border-gray-200 rounded-lg" for="name">
+                    <input
+                        id="name"
+                        v-model="groupData.name" w-full px-0 py-2 text-sm
+                        border-none
+                        type="text"
+                        placeholder="Group Name"
+                    >
+                </label>
+
+                <div grid grid-cols-2 gap-8 mt-5>
+                    <Badge active :disabled="groupData.name === ''" @click="checkOrCreateGroup()">
+                        Create
+                    </Badge>
+                    <Badge @click="panelOpen = false">
+                        Close
+                    </Badge>
+                </div>
+            </div>
+        </Panel>
     </div>
 </template>
 
@@ -82,6 +95,7 @@
         chores: []
     });
     const maxPartecipants = ref(4);
+    const panelOpen = ref(false);
 
     const checkOrCreateGroup = async () => {
         const exists = await getGroup(groupData.name);

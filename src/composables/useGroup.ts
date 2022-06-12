@@ -114,6 +114,10 @@ const useGroup = () => {
         }
     };
 
+    const isGroupOwner = (group: Group, userId: string) => {
+        return group.partecipants.find((partecipant: Partecipant) => (partecipant.user.id === userId) && partecipant.owner);
+    };
+
     return {
         getGroup,
         getGroupPartecipants,
@@ -121,7 +125,8 @@ const useGroup = () => {
         getAllGroups,
         createGroup,
         deleteGroup,
-        leaveGroup
+        leaveGroup,
+        isGroupOwner
     };
 };
 

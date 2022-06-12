@@ -1,13 +1,13 @@
 <template>
     <Alert />
 
-    <Navbar />
-
     <router-view v-slot="{ Component }">
         <Suspense>
-            <component :is="Component" />
+            <component :is="Component" crate-xs />
         </Suspense>
     </router-view>
+
+    <Bottombar />
 </template>
 
 <script lang="ts" setup>
@@ -40,5 +40,24 @@
     }
     button[disabled]{
         @apply opacity-60 cursor-not-allowed;
+    }
+
+    // Transitions
+    .fade-enter-active,
+    .fade-leave-active {
+        @apply transition-opacity ease-in-out duration-500;
+    }
+    .fade-enter-from,
+    .fade-leave-to {
+        @apply opacity-0;
+    }
+
+    .slide-enter-active,
+    .slide-leave-active{
+        @apply transition-transform ease-in-out duration-500;
+    }
+    .slide-enter-from,
+    .slide-leave-to{
+        @apply translate-y-full;
     }
 </style>

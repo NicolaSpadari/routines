@@ -12,8 +12,12 @@ import {
 
 export default defineConfig({
     shortcuts: [
-        ["crate", "max-w-5xl mx-auto"],
-        ["crate-sm", "max-w-sm mx-auto"]
+        ["crate-xs", "max-w-xs mx-auto"],
+        ["crate-sm", "max-w-sm mx-auto"],
+        ["crate-md", "max-w-md mx-auto"],
+        ["crate-lg", "max-w-lg mx-auto"],
+        ["crate-xl", "max-w-xl mx-auto"],
+        ["crate-max", "max-w-5xl mx-auto"]
     ],
     presets: [
         presetUno(),
@@ -40,6 +44,12 @@ export default defineConfig({
         })
     ],
     theme: {
+        colors: {
+            azure: "#f3f6ff",
+            light: "#e0e8f5",
+            night: "#36338c",
+            broncos: "#002244"
+        },
         breakpoints: {
             sm: "576px",
             md: "768px",

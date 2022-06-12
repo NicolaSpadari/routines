@@ -1,28 +1,33 @@
 <template>
-    <div container px-5 mt-10>
-        <div v-if="signedIn" space-y-15>
-            <div crate>
-                <p text-3xl font-bold sm="text-4xl">
-                    Welcome back, {{ user.user.displayName.split(" ")[0] }}!
-                </p>
-            </div>
+    <div mt-5>
+        <div v-if="signedIn" space-y-20>
+            <div space-y-10>
+                <div flex justify-between items-center>
+                    <p text-3xl text-broncos sm="text-4xl">
+                        Hello, <span font-bold>{{ user.user.displayName.split(" ")[0] }}!</span>
+                    </p>
 
-            <div crate-sm>
-                <div grid grid-cols-2 gap-4>
-                    <QuickBox to="/groups" icon="i-heroicons-solid-users" desc="Test descrizione">
-                        Your groups
-                    </QuickBox>
+                    <img v-if="signedIn" :src="user.user.photoURL" w-12 h-12 rounded-full shadow-lg>
                 </div>
+
+                <div flex space-x-5 overflow-x-auto max-w-full pb-2>
+                    <Badge active>
+                        Groups
+                    </Badge>
+                    <Badge>
+                        Tasks
+                    </Badge>
+                </div>
+            </div>
+            <div>
+                <p text-lg text-dark-800 font-bold>
+                    Recent
+                </p>
             </div>
         </div>
 
         <div v-else>
-            <div crate>
-                <p text-3xl font-bold sm="text-4xl">
-                    <RouterLink to="/login" underline>Login</RouterLink>
-                    to start
-                </p>
-            </div>
+            Login
         </div>
     </div>
 </template>

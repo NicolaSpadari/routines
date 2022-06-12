@@ -7,56 +7,67 @@
 </route>
 
 <template>
-    <div v-if="currentGroup" container mt-20>
-        <h1 font-bold font-heading text-4xl>
-            Group {{ currentGroup.name }}
-        </h1>
+    <div mt-5>
+        <div v-if="currentGroup">
+            <div flex justify-between items-center>
+                <p text-3xl text-broncos sm="text-4xl">
+                    Group <span font-bold>{{ currentGroup.name }}</span>
+                </p>
 
-        <div space-y-5 mt-10>
-            <button v-if="isGroupOwner()" @click="deleteGroup($route.params.id); $router.push('/groups')">
-                delete group
-            </button>
-            <button v-else @click="leaveGroup($route.params.id); $router.push('/groups')">
-                leave group
-            </button>
-            <pre>Partecipants: {{ currentGroup.partecipants }}</pre>
-
-            <p>Chores:</p>
-            <ul>
-                <li v-for="chore in currentGroup.chores" :key="chore.name">
-                    {{ chore.name }} <button class="text-xs" @click="deleteChore($route.params.id, chore); refreshGroup()">
-                        (delete)
-                    </button>
-                </li>
-            </ul>
+                <button i-heroicons-outline-cog w-6 h-6 text-night @click="panelOpen = true" />
+            </div>
         </div>
 
-        <div flex flex-col space-y-5 mt-10>
-            <NewChore v-if="$route.params.id" :group-id="$route.params.id" @added="refreshGroup()" />
+        <div space-y-3>
+            <div flex space-x--2 mt-5>
+                <img v-for="person in currentGroup.partecipants" :key="person.user.id" :src="person.user.picture" inline-block h-10 w-10 rounded-full ring-2 ring-white>
+            </div>
+            <p>{{ currentGroup.partecipants.length }} members</p>
 
-            <RouterLink to="/users">
-                Invite someone
-            </RouterLink>
+            <div>
+                <p>Chores:</p>
+                <ul>
+                    <li v-for="chore in currentGroup.chores" :key="chore.name">
+                        {{ chore.name }} <button v-if="isGroupOwner(currentGroup, user.user.id)" class="text-xs" @click="deleteChore($route.params.id, chore); refreshGroup()">
+                            (delete)
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <ChoreCycle :chores="currentGroup.chores" :partecipants="currentGroup.partecipants" @completed="completeChore" />
+
+        <Panel :is-open="panelOpen" @close="panelOpen = false">
+            <div m-5>
+                <button v-if="isGroupOwner(currentGroup, user.user.id)" @click="deleteGroup($route.params.id); $router.push('/groups')">
+                    delete group
+                </button>
+                <button v-else @click="leaveGroup($route.params.id); $router.push('/groups')">
+                    leave group
+                </button>
+
+                <NewChore v-if="$route.params.id" :group-id="$route.params.id" @added="refreshGroup()" />
+
+                <RouterLink to="/users">
+                    Invite users
+                </RouterLink>
+            </div>
+        </Panel>
     </div>
 </template>
 
 <script lang="ts" setup>
     const route = useRoute();
     const { user } = useUser();
-    const { getGroup, deleteGroup } = useGroup();
+    const { getGroup, deleteGroup, isGroupOwner } = useGroup();
     const { addChore, deleteChore } = useChore();
     const { sendMessage } = useMessage();
     const currentGroup = ref<Group>();
+    const panelOpen = ref(false);
 
     const refreshGroup = async () => {
         currentGroup.value = await getGroup(route.params.id.toString());
-    };
-
-    const isGroupOwner = () => {
-        return currentGroup.value?.partecipants.find((partecipant: Partecipant) => (partecipant.user.id === user.value.user?.uid) && partecipant.owner);
     };
 
     const completeChore = async (chore: Chore) => {

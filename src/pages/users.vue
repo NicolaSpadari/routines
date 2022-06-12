@@ -7,36 +7,57 @@
 </route>
 
 <template>
-    <div container mt-20>
-        <input v-model="kw" placeholder="Search user">
-        <ul space-y-5>
-            <template v-for="user in users" :key="user.id">
-                <li v-if="me.user.uid !== user.id">
-                    <p>{{ user.name }} - <span text-sm text-gray-300>({{ user.email }})</span></p>
-
-                    <p v-if="alreadyInvited(user.id)">
-                        Already invited
-
-                        {{ alreadyMember(user.id) ? "and a member" : "but not a member" }}
-                    </p>
-
-                    <template v-else>
-                        <div v-if="ownsGroup(me.user.uid)" space-x-5>
-                            <button v-for="group in groups" :key="group.id" border-1 border-dark-800 @click="inviteUser(user.id, group.id)">
-                                Invite in {{ group.name }}
-                            </button>
-                        </div>
-                        <p v-else text-xs underline text-gray-500>
-                            (You need to own a group to invite someone)
-                        </p>
-                    </template>
-                </li>
-            </template>
-        </ul>
-
-        <p v-if="alreadySearched && kw.value !== ''" class="text-right mt-3 mb-1">
-            {{ users.length }} results found
+    <div space-y-10 mt-5>
+        <p text-3xl font-bold text-broncos sm="text-4xl">
+            Users
         </p>
+        <div>
+            <div relative>
+                <input
+                    v-model="kw" w-full py-3 pl-3 pr-12 text-sm text-night border-2 border-light bg-light rounded-full
+                    type="text"
+                    placeholder="Username"
+                >
+
+                <span absolute text-night translate-y="-55%" pointer-events-none top="1/2" right-4>
+                    <i-heroicons-solid-user w-5 h-5 />
+                </span>
+            </div>
+            <p v-if="alreadySearched && kw.value !== ''" text-right text-broncos mt-3 mb-1>
+                {{ users.length }} result{{ users.length === 1 ? '' : 's' }} found
+            </p>
+        </div>
+        <div space-y-5>
+            <template v-for="user in users" :key="user.id">
+                <div v-if="me.user.uid !== user.id" bg-white grid grid-cols-4 overflow-hidden border border-gray-100 rounded-lg>
+                    <div flex justify-center items-center rounded-lg bg-night>
+                        <img :src="user.picture" rounded-full w-10 h-10 border-2 border-light :alt="user.name">
+                    </div>
+
+                    <div col-span-3 space-y-2 p-3>
+                        <p font-bold>
+                            {{ user.name }}
+                        </p>
+
+                        <p v-if="alreadyInvited(user.id)" text-sm text-gray-500>
+                            Already invited
+                            {{ alreadyMember(user.id) ? "and a member" : "but not a member" }}
+                        </p>
+
+                        <template v-else>
+                            <div v-if="ownsGroup(me.id)" overflow-x-scroll flex space-x-5>
+                                <Badge v-for="group in groups" :key="group.id" @click="inviteUser(user.id, group.id)">
+                                    Invite in {{ group.name }}
+                                </Badge>
+                            </div>
+                            <p v-else text-xs text-gray-400>
+                                You need to own a group to invite someone
+                            </p>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
     </div>
 </template>
 
