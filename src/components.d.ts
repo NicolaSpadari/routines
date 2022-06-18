@@ -14,7 +14,6 @@ declare module '@vue/runtime-core' {
     Navbar: typeof import('./components/Navbar.vue')['default']
     NewChore: typeof import('./components/NewChore.vue')['default']
     Panel: typeof import('./components/Panel.vue')['default']
-    QuickBox: typeof import('./components/QuickBox.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -27,7 +27,7 @@
         </div>
 
         <div v-else>
-            Login
+            <Badge active @click="login()">Login</Badge>
         </div>
     </div>
 </template>
@@ -43,5 +43,5 @@
         ]
     });
 
-    const { user, signedIn } = useUser();
+    const { user, signedIn, login } = useUser();
 </script>
