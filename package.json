@@ -2,8 +2,10 @@
     "name": "routines",
     "version": "0.1.0",
     "private": true,
+    "license": "Apache-2.0",
     "author": "Nicola Spadari",
     "description": "Define home routines for room mates",
+    "homepage": "https://routines.nicolaspadari.dev",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
