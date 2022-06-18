@@ -1,7 +1,7 @@
 <h1 align="center"> 🏠Routines </h1>
 
 <p align="center">
-Made with <a href="https://vitejs.dev">Vite</a> + <a href="https://tauri.studio">Tauri</a> + <a href="https://vuejs.org">Vue 3</a> + Love ❤️
+Made with <a href="https://vitejs.dev">Vite</a> + <a href="https://vuejs.org">Vue 3</a> + Love ❤️
 <br>
 A chore scheduler app
 </p>
