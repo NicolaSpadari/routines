@@ -104,6 +104,11 @@ export default defineConfig({
             }
         })
     ],
+    test: {
+        globals: true,
+        include: ["./test/*.test.ts"],
+        environment: "jsdom"
+    },
     define: VITE_ENV,
     server: {
         fs: {
