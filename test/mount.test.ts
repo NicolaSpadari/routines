@@ -1,5 +1,4 @@
-import { mount } from "@vue/test-utils";
-import Badge from "./src/components/Badge.vue";
+import Badge from "@/components/Badge.vue";
 
 test("mount component", async() => {
     expect(Badge).toBeTruthy();

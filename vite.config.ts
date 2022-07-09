@@ -54,8 +54,8 @@ export default defineConfig({
                 "@vueuse/core",
                 "@vueuse/head",
                 {
-                    "@/firebase": ["auth", "db"],
                     "uuid": [["v4", "uuidV4"]],
+                    "@/firebase": ["auth", "db"],
                     "firebase/app": ["initializeApp"],
                     "firebase/auth": ["GoogleAuthProvider", "signInWithPopup", "getAuth"],
                     "firebase/firestore": [
@@ -71,7 +71,8 @@ export default defineConfig({
                         "where",
                         "arrayUnion",
                         "arrayRemove"
-                    ]
+                    ],
+                    "@vue/test-utils": ["mount"]
                 }
             ],
             resolvers: [dirResolver()]
