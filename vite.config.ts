@@ -6,7 +6,7 @@ import Components from "unplugin-vue-components/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import UnoCSS from "@unocss/vite";
 import EnvLoader from "vite-plugin-envloader";
-import { VitePWA } from "vite-plugin-pwa";
+// import { VitePWA } from "vite-plugin-pwa";
 import { DirResolverHelper, dirResolver } from "vite-auto-import-resolvers";
 
 export default defineConfig({
@@ -62,33 +62,33 @@ export default defineConfig({
             ],
             resolvers: [dirResolver()]
         }),
-        VitePWA({
-            registerType: "autoUpdate",
-            includeAssets: ["favicon.svg", "safari-pinned-tab.svg"],
-            manifest: {
-                name: "Vitesse",
-                short_name: "Vitesse",
-                theme_color: "#ffffff",
-                icons: [
-                    {
-                        src: "/pwa-192x192.png",
-                        sizes: "192x192",
-                        type: "image/png"
-                    },
-                    {
-                        src: "/pwa-512x512.png",
-                        sizes: "512x512",
-                        type: "image/png"
-                    },
-                    {
-                        src: "/pwa-512x512.png",
-                        sizes: "512x512",
-                        type: "image/png",
-                        purpose: "any maskable"
-                    }
-                ]
-            }
-        })
+        // VitePWA({
+        //     registerType: "autoUpdate",
+        //     includeAssets: ["favicon.svg", "safari-pinned-tab.svg"],
+        //     manifest: {
+        //         name: "Vitesse",
+        //         short_name: "Vitesse",
+        //         theme_color: "#ffffff",
+        //         icons: [
+        //             {
+        //                 src: "/pwa-192x192.png",
+        //                 sizes: "192x192",
+        //                 type: "image/png"
+        //             },
+        //             {
+        //                 src: "/pwa-512x512.png",
+        //                 sizes: "512x512",
+        //                 type: "image/png"
+        //             },
+        //             {
+        //                 src: "/pwa-512x512.png",
+        //                 sizes: "512x512",
+        //                 type: "image/png",
+        //                 purpose: "any maskable"
+        //             }
+        //         ]
+        //     }
+        // })
     ],
     server: {
         fs: {
