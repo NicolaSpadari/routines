@@ -1,6 +1,6 @@
 {
-    "name": "vite-vue-template",
-    "version": "3.2.0",
+    "name": "routines",
+    "version": "1.0.0",
     "private": true,
     "author": "Nicola Spadari",
     "scripts": {
