@@ -5,7 +5,7 @@ import Pages from "vite-plugin-pages";
 import Components from "unplugin-vue-components/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import UnoCSS from "@unocss/vite";
-import EnvLoader from "vite-plugin-envloader";
+// import EnvLoader from "vite-plugin-envloader";
 import { VitePWA } from "vite-plugin-pwa";
 import { DirResolverHelper, dirResolver } from "vite-auto-import-resolvers";
 
@@ -31,7 +31,7 @@ export default defineConfig({
         Components({
             deep: false
         }),
-        EnvLoader(),
+        // EnvLoader(),
         DirResolverHelper(),
         AutoImport({
             imports: [
