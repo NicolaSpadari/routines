@@ -76,7 +76,9 @@
     const maxPartecipants = 4;
 
     onBeforeMount(async () => {
-        const gps = await getUserGroups(user.value.uid);
-        myGroups.value = gps;
+        if (signedIn) {
+            const gps = await getUserGroups(user.value.uid);
+            myGroups.value = gps;
+        }
     });
 </script>
