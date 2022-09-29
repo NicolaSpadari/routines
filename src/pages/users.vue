@@ -45,8 +45,8 @@
                         </p>
 
                         <template v-else>
-                            <div v-if="ownsGroup(me.id)" overflow-x-scroll flex space-x-5>
-                                <Badge v-for="group in groups" :key="group.id" @click="inviteUser(user.id, group.id)">
+                            <div v-if="ownsGroup(me.uid)" overflow-x-auto flex space-x-5>
+                                <Badge v-for="group in myGroups" :key="group.id" @click="inviteUser(user.id, group.id)">
                                     Invite in {{ group.name }}
                                 </Badge>
                             </div>
@@ -84,7 +84,7 @@
     myGroups.value = await getUserGroups(me.value.uid);
 
     const ownsGroup = (userId: string) => {
-        return groups.value.some((group) => group.partecipants.some((partecipant) => partecipant.user.id === userId));
+        return myGroups.value.some((group) => group.partecipants.some((partecipant) => partecipant.user.id === userId));
     };
 
     const inviteUser = async (userId: string, groupId: string) => {
