@@ -11,7 +11,7 @@ const useChore = () => {
             if (notify) {
                 sendMessage(`Chore ${newChore.name} was added to the group`);
             }
-        } catch (err) {
+        } catch (err: any) {
             showAlert(err);
         }
     };
@@ -28,7 +28,28 @@ const useChore = () => {
             if (notify) {
                 sendMessage(`${chore.name} was removed from the group`);
             }
-        } catch (err) {
+        } catch (err: any) {
+            showAlert(err);
+        }
+    };
+
+    const resetChores = async (groupId: string) => {
+        const { showAlert } = useAlert();
+        const { getGroup } = useGroup();
+
+        try {
+            const group = await getGroup(groupId);
+            const emptyChores = group?.chores.map((chore: Chore) => {
+                chore.completed = [];
+                return chore;
+            });
+
+            console.log(group)
+
+            await updateDoc(doc(db, "groups", groupId), {
+                chores: emptyChores
+            });
+        } catch (err: any) {
             showAlert(err);
         }
     };
@@ -41,7 +62,8 @@ const useChore = () => {
     return {
         addChore,
         deleteChore,
-        getShiftedChores
+        getShiftedChores,
+        resetChores
     };
 };
 

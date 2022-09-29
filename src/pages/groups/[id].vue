@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <ChoreCycle :chores="currentGroup.chores" :partecipants="currentGroup.partecipants" @completed="completeChore" />
+            <ChoreCycle :groupId="currentGroup.id" :chores="currentGroup.chores" :partecipants="currentGroup.partecipants" @completed="completeChore" />
         </div>
 
         <div crate space-y-5 mt-5>

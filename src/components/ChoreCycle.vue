@@ -32,20 +32,24 @@
         </div>
 
         <div v-if="allChoresCompleted(user.uid).value" text-center mt-5>
-            <p font-bold text-green-500>You are all done!</p>
+            <p font-bold text-green-500>
+                You are all done!
+            </p>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
     const props = defineProps<{
+        groupId: string
         chores: Chore[]
         partecipants: Partecipant[]
     }>();
 
     const emit = defineEmits(["completed"]);
     const { user } = useUser();
-    const { getShiftedChores } = useChore();
+    const { showAlert } = useAlert();
+    const { getShiftedChores, resetChores } = useChore();
 
     const handleCheck = (e: any, chore: Chore) => {
         if (e.target.checked) {
@@ -54,4 +58,9 @@
     };
 
     const allChoresCompleted = (partecipantId: string) => computed(() => props.chores.every((chore: Chore) => chore.completed.includes(partecipantId)));
+
+    if (props.partecipants.every((partecipant: Partecipant) => allChoresCompleted(partecipant.user.id).value)) {
+        resetChores(props.groupId);
+        showAlert("Chores have been reset");
+    }
 </script>
