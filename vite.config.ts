@@ -64,25 +64,25 @@ export default defineConfig({
         }),
         VitePWA({
             registerType: "autoUpdate",
-            includeAssets: ["favicon.svg", "safari-pinned-tab.svg"],
+            includeAssets: ["favicon.ico", "safari-pinned-tab.svg"],
             manifest: {
-                name: "Vitesse",
-                short_name: "Vitesse",
-                theme_color: "#ffffff",
+                name: "Routines",
+                short_name: "Routines",
+                theme_color: "#002244",
                 icons: [
                     {
-                        src: "/pwa-192x192.png",
+                        src: "/android-chrome-192x192.png",
                         sizes: "192x192",
                         type: "image/png"
                     },
                     {
-                        src: "/pwa-512x512.png",
-                        sizes: "512x512",
+                        src: "/android-chrome-384x384.png",
+                        sizes: "384x384",
                         type: "image/png"
                     },
                     {
-                        src: "/pwa-512x512.png",
-                        sizes: "512x512",
+                        src: "/android-chrome-384x384.png",
+                        sizes: "384x384",
                         type: "image/png",
                         purpose: "any maskable"
                     }
