@@ -9,7 +9,7 @@ const useInvite = () => {
         try {
             const newInvite = {
                 id: inviteId,
-                inviteFrom: await getUser(me.value.user?.uid),
+                inviteFrom: await getUser(me.value.uid),
                 inviteTo: await getUser(userId),
                 inviteToGroup: await getGroup(groupId),
                 accepted: false
@@ -17,9 +17,9 @@ const useInvite = () => {
 
             await setDoc(doc(db, "invites", inviteId), newInvite);
 
-            sendMessage(`${newInvite.inviteFrom?.name} invited ${newInvite.inviteTo?.name} to join ${newInvite.inviteToGroup.name}`);
+            sendMessage(`${newInvite.inviteFrom?.name} invited ${newInvite.inviteTo?.name} to join ${newInvite.inviteToGroup?.name}`);
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`invite: ${err}`);
         }
     };
 
@@ -33,7 +33,7 @@ const useInvite = () => {
                 invites.push(doc.data() as Invite);
             });
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`getInvitesSent: ${err}`);
         }
 
         return invites;
@@ -49,7 +49,7 @@ const useInvite = () => {
                 invites.push(doc.data() as Invite);
             });
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`getInvitesReceived: ${err}`);
         }
 
         return invites;
@@ -69,7 +69,7 @@ const useInvite = () => {
 
             sendMessage(`${partecipant.user.name} accepted the invite!`);
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`acceptInvite: ${err}`);
         }
     };
 
@@ -79,7 +79,7 @@ const useInvite = () => {
         try {
             await deleteDoc(doc(db, "invites", inviteId));
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`deleteInvite: ${err}`);
         }
     };
 

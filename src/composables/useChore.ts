@@ -12,7 +12,7 @@ const useChore = () => {
                 sendMessage(`Chore ${newChore.name} was added to the group`);
             }
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`addChore: ${err}`);
         }
     };
 
@@ -29,7 +29,7 @@ const useChore = () => {
                 sendMessage(`${chore.name} was removed from the group`);
             }
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`deleteChore: ${err}`);
         }
     };
 
@@ -50,7 +50,7 @@ const useChore = () => {
                 chores: emptyChores
             });
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`resetChore: ${err}`);
         }
     };
 

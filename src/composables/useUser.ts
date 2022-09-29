@@ -11,17 +11,15 @@ const useUser = () => {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
 
-            console.log(result)
-
             await setDoc(doc(db, "users", result.user.uid), {
                 id: result.user.uid,
                 name: result.user.displayName,
                 email: result.user.email,
                 picture: result.user.photoURL
             });
-            user.value = result.user as User;
+            user.value = result.user as unknown as User;
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`login: ${err}`);
         }
     };
 
@@ -41,7 +39,7 @@ const useUser = () => {
                 user = result.data();
             }
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`getUser: ${err}`);
         }
 
         return user;
@@ -57,7 +55,7 @@ const useUser = () => {
                 users.push(doc.data() as User);
             });
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`getUsers: ${err}`);
         }
 
         return users;
@@ -73,7 +71,7 @@ const useUser = () => {
                 users.push(doc.data() as User);
             });
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`getUsersByName: ${err}`);
         }
 
         return users;

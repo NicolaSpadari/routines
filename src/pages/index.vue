@@ -21,7 +21,7 @@
                     <span w-20 border-b border-gray-300 />
                 </div>
 
-                <div grid lg="grid-cols-2 gap-4" space-y-5 mt-5>
+                <div v-if="myGroups.length" grid lg="grid-cols-2 gap-4" space-y-5 mt-5>
                     <RouterLink v-for="group in myGroups" :key="group.id" :to="`/groups/${group.id}`" block p-8 bg-white shadow-xl hover="shadow-2xl" transition-shadow rounded-xl>
                         <p text-xl font-bold text-broncos>
                             {{ group.name }} <span text-gray-400 text-base font-normal>&middot; {{ group.chores.length }} chores</span>
@@ -48,13 +48,50 @@
                         </p>
                     </RouterLink>
                 </div>
+
+                <div v-else grid grid-cols-1 md="grid-cols-2" mt-20>
+                    <div>
+                        <Invites />
+                    </div>
+                    <div>
+                        <p mb-3>
+                            No groups present. Create new group
+                        </p>
+                        <div relative>
+                            <input
+                                v-model="newGroup.name"
+                                type="text"
+                                placeholder="New group name"
+                                w-full py-3 pr-13 pl-3 border-gray-200 rounded-md shadow sm="text-sm" outline-none
+                            >
+
+                            <span absolute inset-y-0 right-3 grid place-content-center>
+                                <button
+                                    type="button"
+                                    text-white
+                                    bg-blue-500 p-1 rounded-full w-8 h-8 @click="setPartecipant();createGroup(newGroup)"
+                                >
+                                    <i-heroicons-outline-plus w-4 h-4 />
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div v-else>
-            <Badge active @click="login()">
-                Login
-            </Badge>
+            <div>
+                <div flex justify-between items-center>
+                    <p text-3xl text-broncos sm="text-4xl">
+                        Please login
+                    </p>
+
+                    <Badge active @click="login()">
+                        Login
+                    </Badge>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -71,12 +108,30 @@
     });
 
     const { user, signedIn, login } = useUser();
-    const { getUserGroups } = useGroup();
+    const { getUserGroups, createGroup } = useGroup();
     const myGroups = ref<Group[]>([]);
     const maxPartecipants = 4;
+    const newGroup = reactive<Group>({
+        id: uuidV4(),
+        partecipants: [],
+        name: "",
+        chores: []
+    });
+
+    const setPartecipant = () => {
+        newGroup.partecipants.push({
+            user: {
+                id: user.value.uid,
+                name: user.value.displayName,
+                email: user.value.email,
+                picture: user.value.photoURL
+            },
+            owner: true
+        });
+    };
 
     onBeforeMount(async () => {
-        if (signedIn) {
+        if (signedIn.value) {
             const gps = await getUserGroups(user.value.uid);
             myGroups.value = gps;
         }

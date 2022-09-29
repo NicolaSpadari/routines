@@ -9,7 +9,7 @@ const useGroup = () => {
                 ...groupData
             });
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`createGroup: ${err}`);
         }
     };
 
@@ -24,7 +24,7 @@ const useGroup = () => {
                 group = result.data();
             }
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`getGroup: ${err}`);
         }
 
         return group as Group;
@@ -45,7 +45,7 @@ const useGroup = () => {
                 groups.push(doc.data() as Group);
             });
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`getUserGroups: ${err}`);
         }
 
         return groups;
@@ -62,7 +62,7 @@ const useGroup = () => {
                 groups.push(doc.data() as Group);
             });
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`getAllGroups: ${err}`);
         }
 
         return groups;
@@ -83,7 +83,7 @@ const useGroup = () => {
                 groupPartecipants.push(doc.data() as User);
             });
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`getGroupPartecipants: ${err}`);
         }
 
         return groupPartecipants;
@@ -100,7 +100,7 @@ const useGroup = () => {
 
             sendMessage(`${partecipant.user.name} left the group`);
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`leaveGroup: ${err}`);
         }
     };
 
@@ -110,7 +110,7 @@ const useGroup = () => {
         try {
             await deleteDoc(doc(db, "groups", groupId));
         } catch (err: any) {
-            showAlert(err);
+            showAlert(`deleteGroup: ${err}`);
         }
     };
 
